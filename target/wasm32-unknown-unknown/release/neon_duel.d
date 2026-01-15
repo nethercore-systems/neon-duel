@@ -1,1 +1,0 @@
-D:\Development\nethercore-project\neon-duel\target\wasm32-unknown-unknown\release\neon_duel.wasm: D:\Development\nethercore-project\neon-duel\src\..\..\nethercore\include\zx.rs D:\Development\nethercore-project\neon-duel\src\lib.rs

@@ -1,0 +1,18 @@
+# Rust build artifacts
+/target/
+Cargo.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Speccade generated assets (regenerate from specs)
+/assets/generated/
+
+# Burl workflow state
+/.burl/
