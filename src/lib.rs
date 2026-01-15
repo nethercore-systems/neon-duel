@@ -40,10 +40,10 @@ const BILLBOARD_CYLINDRICAL_Y: u32 = 2;
 const MAX_PLAYERS: usize = 4;
 const MAX_BULLETS: usize = 32;
 
-// Physics
-const GRAVITY: f32 = 0.6;
-const JUMP_FORCE: f32 = 11.0;
-const MOVE_SPEED: f32 = 6.0;
+// Physics (tuned for 60fps fixed timestep)
+const GRAVITY: f32 = 0.025;
+const JUMP_FORCE: f32 = 0.5;
+const MOVE_SPEED: f32 = 0.15;
 const FRICTION: f32 = 0.85;
 const AIR_FRICTION: f32 = 0.95;
 
@@ -52,12 +52,15 @@ const PLAYER_WIDTH: f32 = 0.8;
 const PLAYER_HEIGHT: f32 = 1.2;
 
 // Combat
-const BULLET_SPEED: f32 = 18.0;
+const BULLET_SPEED: f32 = 0.4;
 const BULLET_LIFETIME: u32 = 120; // 2 seconds at 60fps
 const MAX_AMMO: u32 = 3;
 const MELEE_DURATION: u32 = 12;   // ticks active
 const MELEE_RANGE: f32 = 1.8;
-const RESPAWN_DELAY: u32 = 60;    // 1 second
+const RESPAWN_DELAY: u32 = 90;    // 1.5 seconds
+
+// World bounds (respawn if player falls below this)
+const DEATH_Y: f32 = -8.0;
 
 // Match rules
 const KILLS_TO_WIN: u32 = 5;
@@ -172,6 +175,7 @@ impl Platform {
 
 #[derive(Clone, Copy, PartialEq)]
 enum GamePhase {
+    Title,      // Main menu / title screen
     Countdown,  // 3-2-1 before round starts
     Playing,    // Active gameplay
     RoundEnd,   // Someone got a kill, brief pause
@@ -189,7 +193,7 @@ struct GameState {
 impl GameState {
     const fn new() -> Self {
         Self {
-            phase: GamePhase::Countdown,
+            phase: GamePhase::Title,
             countdown: 180, // 3 seconds
             round_end_timer: 0,
             current_stage: 0,
@@ -213,6 +217,9 @@ static mut PIT_Y: f32 = -10.0;
 
 // Mesh handles (created in init)
 static mut CUBE_MESH: u32 = 0;
+static mut CAPSULE_MESH: u32 = 0;
+static mut SPHERE_MESH: u32 = 0;
+static mut BULLET_MESH: u32 = 0;
 
 // =============================================================================
 // HELPER FUNCTIONS
@@ -464,8 +471,11 @@ pub extern "C" fn init() {
         // Dark background
         set_clear_color(0x0a0a1aFF);
 
-        // Create mesh handles
+        // Create mesh handles for 3D rendering
         CUBE_MESH = cube(1.0, 1.0, 1.0);
+        CAPSULE_MESH = capsule(0.4, 0.8, 12, 6);  // Body - pill shape
+        SPHERE_MESH = sphere(0.3, 12, 8);         // Head
+        BULLET_MESH = sphere(0.1, 8, 6);          // Small bullet sphere
 
         // Initialize game
         reset_match();
@@ -599,7 +609,7 @@ fn update_player(idx: usize) {
             p.melee_timer = MELEE_DURATION;
 
             // Melee gives a small dash in facing direction
-            p.vx += if p.facing_right { 3.0 } else { -3.0 };
+            p.vx += if p.facing_right { 0.15 } else { -0.15 };
         }
 
         // Update melee timer
@@ -607,9 +617,9 @@ fn update_player(idx: usize) {
             p.melee_timer -= 1;
         }
 
-        // Apply velocity
-        let new_x = p.x + p.vx * delta_time() * 60.0;
-        let new_y = p.y + p.vy * delta_time() * 60.0;
+        // Apply velocity (fixed timestep, no delta_time needed)
+        let new_x = p.x + p.vx;
+        let new_y = p.y + p.vy;
 
         // Platform collision
         p.on_ground = false;
@@ -655,8 +665,8 @@ fn update_player(idx: usize) {
         // Level bounds
         p.x = clamp(p.x, -10.0, 10.0 - PLAYER_WIDTH);
 
-        // Pit death
-        if HAS_PIT && p.y < PIT_Y {
+        // Fall death (universal - all stages)
+        if p.y < DEATH_Y {
             kill_player(idx, idx as u32); // Self-kill (no points)
         }
     }
@@ -736,9 +746,9 @@ fn update_bullets() {
                 continue;
             }
 
-            // Move bullet
-            bullet.x += bullet.vx * delta_time() * 60.0;
-            bullet.y += bullet.vy * delta_time() * 60.0;
+            // Move bullet (fixed timestep)
+            bullet.x += bullet.vx;
+            bullet.y += bullet.vy;
 
             // Lifetime
             bullet.lifetime -= 1;
@@ -887,6 +897,17 @@ pub extern "C" fn update() {
         TICK += 1;
 
         match GAME_STATE.phase {
+            GamePhase::Title => {
+                // Any player pressing A or START begins the game
+                for i in 0..player_count() {
+                    if button_pressed(i, BUTTON_A) != 0 || button_pressed(i, BUTTON_START) != 0 {
+                        reset_match();
+                        GAME_STATE.phase = GamePhase::Countdown;
+                        return;
+                    }
+                }
+            }
+
             GamePhase::Countdown => {
                 if GAME_STATE.countdown > 0 {
                     GAME_STATE.countdown -= 1;
@@ -916,10 +937,10 @@ pub extern "C" fn update() {
             }
 
             GamePhase::MatchEnd => {
-                // Check for restart
+                // Check for restart - go back to title
                 for i in 0..MAX_PLAYERS {
                     if PLAYERS[i].active && button_pressed(i as u32, BUTTON_START) != 0 {
-                        reset_match();
+                        GAME_STATE.phase = GamePhase::Title;
                         return;
                     }
                 }
@@ -1045,18 +1066,38 @@ fn render_stage() {
         // Draw EPU layers
         draw_env();
 
-        // Draw platforms
-        set_color(0x404060FF);
+        // Draw platforms with 3D depth
         for platform in &PLATFORMS {
             if !platform.active {
                 continue;
             }
 
-            // Draw as rectangles in 3D space
+            let px = platform.x + platform.width / 2.0;
+            let py = platform.y + platform.height / 2.0;
+            let depth = 0.6;  // Platform thickness in Z
+
+            // Main platform body - darker base color
+            set_color(0x303050FF);
             push_identity();
-            push_translate(platform.x + platform.width / 2.0, platform.y + platform.height / 2.0, 0.0);
-            push_scale(platform.width, platform.height, 0.1);
+            push_translate(px, py, -depth / 2.0);
+            push_scale(platform.width, platform.height, depth);
             draw_mesh(CUBE_MESH);
+
+            // Top surface highlight
+            set_color(0x505080FF);
+            push_identity();
+            push_translate(px, py + platform.height * 0.4, 0.0);
+            push_scale(platform.width * 0.95, platform.height * 0.2, depth * 1.01);
+            draw_mesh(CUBE_MESH);
+
+            // Edge glow for moving platforms
+            if platform.moving {
+                set_color(0xFF00FF60);  // Magenta glow
+                push_identity();
+                push_translate(px, py, depth / 2.0 + 0.05);
+                push_scale(platform.width * 1.02, platform.height * 1.02, 0.02);
+                draw_mesh(CUBE_MESH);
+            }
         }
     }
 }
@@ -1068,77 +1109,160 @@ fn render_players() {
                 continue;
             }
 
-            // Player color
+            let center_x = player.x + PLAYER_WIDTH / 2.0;
+            let center_y = player.y + PLAYER_HEIGHT / 2.0;
+
+            // Player body (capsule) - main color
             set_color(PLAYER_COLORS[i]);
-
-            // Draw player as capsule-ish shape
             push_identity();
-            push_translate(
-                player.x + PLAYER_WIDTH / 2.0,
-                player.y + PLAYER_HEIGHT / 2.0,
-                0.1,
-            );
+            push_translate(center_x, center_y, 0.0);
 
-            // Flip based on facing
-            let scale_x = if player.facing_right { PLAYER_WIDTH } else { -PLAYER_WIDTH };
-            push_scale(scale_x, PLAYER_HEIGHT, 0.3);
-            draw_mesh(CUBE_MESH);
+            // Slight tilt when moving for dynamic feel
+            if abs(player.vx) > 0.02 {
+                let tilt = player.vx * 5.0;
+                push_rotate_z(tilt);
+            }
 
-            // Draw melee slash effect
+            draw_mesh(CAPSULE_MESH);
+
+            // Player head (sphere) - slightly lighter color
+            let head_color = brighten_color(PLAYER_COLORS[i]);
+            set_color(head_color);
+            push_identity();
+            push_translate(center_x, player.y + PLAYER_HEIGHT - 0.1, 0.1);
+            draw_mesh(SPHERE_MESH);
+
+            // Draw "eye" indicator for facing direction
+            set_color(0xFFFFFFFF);
+            push_identity();
+            let eye_offset = if player.facing_right { 0.15 } else { -0.15 };
+            push_translate(center_x + eye_offset, player.y + PLAYER_HEIGHT, 0.2);
+            push_scale(0.08, 0.08, 0.08);
+            draw_mesh(SPHERE_MESH);
+
+            // Draw melee slash effect (arc-shaped)
             if player.melee_timer > 0 {
-                set_color(0xFFFFFF80);
+                // Slash brightness based on timer
+                let alpha = ((player.melee_timer as f32 / MELEE_DURATION as f32) * 200.0) as u32;
+                set_color(0xFFFFFF00 | alpha);
+
                 push_identity();
 
                 let slash_x = if player.facing_right {
-                    player.x + PLAYER_WIDTH
+                    center_x + 0.6
                 } else {
-                    player.x - MELEE_RANGE
+                    center_x - 0.6
                 };
 
-                push_translate(
-                    slash_x + MELEE_RANGE / 2.0,
-                    player.y + PLAYER_HEIGHT / 2.0,
-                    0.2,
-                );
-                push_scale(MELEE_RANGE, PLAYER_HEIGHT * 0.5, 0.1);
+                push_translate(slash_x, center_y, 0.15);
+
+                // Rotate slash based on facing
+                if !player.facing_right {
+                    push_rotate_z(3.14159);
+                }
+
+                push_scale(MELEE_RANGE * 0.6, PLAYER_HEIGHT * 0.4, 0.05);
                 draw_mesh(CUBE_MESH);
             }
 
-            // Ammo indicator (small dots above player)
-            set_color(0xFFFF0080);
+            // Ammo indicator (small spheres above player)
             for a in 0..player.ammo {
+                // Alternate colors slightly for visual interest
+                let ammo_color = if a % 2 == 0 { 0xFFFF00FF } else { 0xFFDD00FF };
+                set_color(ammo_color);
                 push_identity();
                 push_translate(
-                    player.x + PLAYER_WIDTH / 2.0 - 0.3 + (a as f32 * 0.3),
-                    player.y + PLAYER_HEIGHT + 0.3,
+                    center_x - 0.25 + (a as f32 * 0.25),
+                    player.y + PLAYER_HEIGHT + 0.35,
                     0.1,
                 );
-                push_scale(0.15, 0.15, 0.1);
-                draw_mesh(CUBE_MESH);
+                push_scale(0.6, 0.6, 0.6);
+                draw_mesh(BULLET_MESH);
             }
         }
     }
 }
 
+// Helper to brighten a color for head/highlights
+fn brighten_color(color: u32) -> u32 {
+    let r = ((color >> 24) & 0xFF).min(255);
+    let g = ((color >> 16) & 0xFF).min(255);
+    let b = ((color >> 8) & 0xFF).min(255);
+    let a = color & 0xFF;
+
+    let r = (r + 40).min(255);
+    let g = (g + 40).min(255);
+    let b = (b + 40).min(255);
+
+    (r << 24) | (g << 16) | (b << 8) | a
+}
+
 fn render_bullets() {
     unsafe {
-        set_color(0xFFFF00FF); // Yellow bullets
-
         for bullet in &BULLETS {
             if !bullet.active {
                 continue;
             }
 
+            // Bright yellow bullet with glow effect
+            set_color(0xFFFF00FF);
             push_identity();
             push_translate(bullet.x, bullet.y, 0.15);
-            push_scale(0.2, 0.2, 0.2);
-            draw_mesh(CUBE_MESH);
+            push_scale(1.5, 1.5, 1.5);  // Scale up the small bullet mesh
+            draw_mesh(BULLET_MESH);
+
+            // Subtle glow/trail behind bullet
+            set_color(0xFFFF0060);
+            push_identity();
+            push_translate(bullet.x - bullet.vx * 0.5, bullet.y - bullet.vy * 0.5, 0.1);
+            push_scale(1.0, 1.0, 1.0);
+            draw_mesh(BULLET_MESH);
         }
+    }
+}
+
+fn render_title() {
+    unsafe {
+        // Title background
+        set_color(0x000000DD);
+        draw_rect(200.0, 150.0, 560.0, 280.0);
+
+        // Game title
+        set_color(0x00FFFFFF); // Cyan
+        draw_text_str("NEON DUEL", 320.0, 200.0, 64.0);
+
+        // Subtitle
+        set_color(0xFF00FFFF); // Magenta
+        draw_text_str("Platform Fighter", 360.0, 270.0, 24.0);
+
+        // Player count
+        set_color(0xFFFFFFFF);
+        let players_str = match player_count() {
+            1 => "1 Player",
+            2 => "2 Players",
+            3 => "3 Players",
+            _ => "4 Players",
+        };
+        draw_text_str(players_str, 420.0, 320.0, 20.0);
+
+        // Instructions
+        set_color(0x00FF00FF); // Green
+        draw_text_str("Press A or START to begin", 340.0, 380.0, 18.0);
+
+        // Controls hint
+        set_color(0x808080FF);
+        draw_text_str("Move: D-Pad/Stick | Jump: A | Shoot: B | Melee: X", 260.0, 420.0, 14.0);
     }
 }
 
 fn render_ui() {
     unsafe {
+        // Title screen
+        if GAME_STATE.phase == GamePhase::Title {
+            render_title();
+            return;
+        }
+
         // Score display
         set_color(0x000000AA);
         draw_rect(10.0, 10.0, 200.0, 30.0 + (player_count() as f32 * 25.0));
