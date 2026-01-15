@@ -1,0 +1,72 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_crash",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60004,
+  "description": "Full-bodied crash cymbal with rich harmonics",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_crash.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C5",
+      "duration_seconds": 1.2,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 4000.0,
+            "num_partials": 12,
+            "inharmonicity": 3.2
+          },
+          "envelope": {"attack": 0.002, "decay": 0.7, "sustain": 0.15, "release": 0.4},
+          "volume": 0.6,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 6500.0,
+            "num_partials": 10,
+            "inharmonicity": 3.5
+          },
+          "envelope": {"attack": 0.001, "decay": 0.6, "sustain": 0.12, "release": 0.35},
+          "volume": 0.5,
+          "pan": 0.15
+        },
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 2800.0,
+            "num_partials": 8,
+            "inharmonicity": 2.8
+          },
+          "envelope": {"attack": 0.002, "decay": 0.65, "sustain": 0.13, "release": 0.38},
+          "volume": 0.45,
+          "pan": -0.15
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": {"type": "bandpass", "center": 5500.0, "resonance": 0.35}
+          },
+          "envelope": {"attack": 0.001, "decay": 0.5, "sustain": 0.08, "release": 0.4},
+          "volume": 0.4,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": {"type": "highpass", "cutoff": 8000.0, "resonance": 0.25}
+          },
+          "envelope": {"attack": 0.001, "decay": 0.4, "sustain": 0.05, "release": 0.3},
+          "volume": 0.35,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

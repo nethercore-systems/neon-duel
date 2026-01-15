@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "032bb10caae861a2ec6c5528425f49375aedfcbe1c52544e5cde3de627b7fec3",
+  "asset_id": "inst_snare_layered",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60002,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "b0214500dfcd971055d39a44e31b2a03eac6a6096d12fd942c9595e006773b55",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_snare_layered.wav",
+      "hash": "7621b081f0d5e94c3c3cee4a4fedf8ac64228bb528ad3f760f2061b36917b4b1"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "39eb93a69ff3ac4fc47b767dbe95845325e236fd07868af54eae8fed3d973f99",
+  "asset_id": "inst_pad_void",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60043,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "8035ac151eb220557d6cd91c525669f40979a227cc5e5698f68c0caf8653080e",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_pad_void.wav",
+      "hash": "59826a1498a35f8900d39e0b58047cbe223e25f8ce1c20469ced8b3b5b90d438"
+    }
+  ],
+  "duration_ms": 11,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

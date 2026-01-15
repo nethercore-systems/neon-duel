@@ -1,0 +1,85 @@
+{
+  "spec_version": 1,
+  "asset_id": "sfx_deflect",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42004,
+  "description": "Bullet deflection - Professional metallic ping with rich harmonics, shimmer, transient crack, and sub-bass punch",
+  "outputs": [
+    { "kind": "primary", "format": "wav", "path": "assets/generated/sfx_deflect.wav" }
+  ],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 0.35,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 2200.0,
+            "num_partials": 12,
+            "inharmonicity": 2.8
+          },
+          "envelope": { "attack": 0.0, "decay": 0.28, "sustain": 0.0, "release": 0.07 },
+          "volume": 0.75,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 3300.0,
+            "num_partials": 10,
+            "inharmonicity": 2.2
+          },
+          "envelope": { "attack": 0.0, "decay": 0.22, "sustain": 0.0, "release": 0.08 },
+          "volume": 0.6,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 4400.0,
+            "modulator_freq": 8800.0,
+            "modulation_index": 3.5
+          },
+          "envelope": { "attack": 0.0, "decay": 0.15, "sustain": 0.0, "release": 0.05 },
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": { "type": "highpass", "cutoff": 10000.0, "resonance": 0.8 }
+          },
+          "envelope": { "attack": 0.0, "decay": 0.025, "sustain": 0.0, "release": 0.015 },
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 5500.0
+          },
+          "envelope": { "attack": 0.0, "decay": 0.18, "sustain": 0.0, "release": 0.06 },
+          "volume": 0.45,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 85.0,
+            "modulator_freq": 42.5,
+            "modulation_index": 8.0
+          },
+          "envelope": { "attack": 0.0, "decay": 0.08, "sustain": 0.0, "release": 0.02 },
+          "volume": 0.4,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

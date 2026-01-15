@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "00152fd7485602fb7ca825ad62646f12c64ad3716ed3f0e06ed3a62132a1ded1",
+  "asset_id": "inst_sub_deep",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60014,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "25c1f87cb7a9ec156b0dab40e9faa7785edf7b185b326d17a4cafe6801050401",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_sub_deep.wav",
+      "hash": "8e57f68562d0ae155c5d2b3ca6a734e67236d31c9e045e4b5a280931c240f0f6"
+    }
+  ],
+  "duration_ms": 2,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

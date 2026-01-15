@@ -1,0 +1,85 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_lead_square",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60022,
+  "description": "Retro-modern square lead - PWM character with harmonic depth",
+  "outputs": [
+    { "kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_lead_square.wav" }
+  ],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 1.5,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "square",
+            "frequency": 261.63,
+            "duty": 0.5
+          },
+          "envelope": {
+            "attack": 0.012,
+            "decay": 0.2,
+            "sustain": 0.7,
+            "release": 0.25
+          },
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "square",
+            "frequency": 261.63,
+            "duty": 0.25
+          },
+          "envelope": {
+            "attack": 0.015,
+            "decay": 0.22,
+            "sustain": 0.65,
+            "release": 0.28
+          },
+          "volume": 0.28,
+          "pan": -0.3
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "square",
+            "frequency": 261.63,
+            "duty": 0.75
+          },
+          "envelope": {
+            "attack": 0.015,
+            "decay": 0.22,
+            "sustain": 0.65,
+            "release": 0.28
+          },
+          "volume": 0.28,
+          "pan": 0.3
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sawtooth",
+            "frequency": 523.26
+          },
+          "envelope": {
+            "attack": 0.01,
+            "decay": 0.18,
+            "sustain": 0.45,
+            "release": 0.22
+          },
+          "volume": 0.12,
+          "pan": 0.0
+        }
+      ],
+      "generate_loop_points": true
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "be210b65ee07e69dac6e0a27020c5a03ad15db8dda4b5c98e4c8c792193ab275",
+  "asset_id": "sfx_shoot",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42001,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "951ff1de6d4e0b9842de482a71295b579c2cec0995e19a6826dc98438d0988b3",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/sfx_shoot.wav",
+      "hash": "98c2e7bdfbe0241f7a943acdcaf5d70e079aacb3d06d4e5632842d6224162796"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

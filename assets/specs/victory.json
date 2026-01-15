@@ -1,0 +1,124 @@
+{
+  "spec_version": 1,
+  "asset_id": "sfx_victory",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42100,
+  "description": "Victory fanfare - Professional triumphant chord progression with rich FM harmonics, sub-bass, and celebration feel",
+  "outputs": [
+    { "kind": "primary", "format": "wav", "path": "assets/generated/sfx_victory.wav" }
+  ],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 2.2,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 523.25
+          },
+          "envelope": { "attack": 0.01, "decay": 0.8, "sustain": 0.4, "release": 0.6 },
+          "volume": 0.65,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 659.25
+          },
+          "envelope": { "attack": 0.01, "decay": 0.75, "sustain": 0.4, "release": 0.6 },
+          "volume": 0.6,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 783.99
+          },
+          "envelope": { "attack": 0.01, "decay": 0.7, "sustain": 0.4, "release": 0.6 },
+          "volume": 0.6,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 1046.5
+          },
+          "envelope": { "attack": 0.015, "decay": 0.9, "sustain": 0.45, "release": 0.7 },
+          "volume": 0.7,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 523.25,
+            "modulator_freq": 1569.75,
+            "modulation_index": 3.5
+          },
+          "envelope": { "attack": 0.015, "decay": 0.85, "sustain": 0.3, "release": 0.65 },
+          "volume": 0.45,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 1046.5,
+            "modulator_freq": 2093.0,
+            "modulation_index": 2.8
+          },
+          "envelope": { "attack": 0.018, "decay": 0.95, "sustain": 0.35, "release": 0.7 },
+          "volume": 0.4,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "triangle",
+            "frequency": 261.63
+          },
+          "envelope": { "attack": 0.02, "decay": 1.1, "sustain": 0.35, "release": 0.7 },
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 130.81
+          },
+          "envelope": { "attack": 0.025, "decay": 1.0, "sustain": 0.3, "release": 0.65 },
+          "volume": 0.45,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 2093.0,
+            "num_partials": 6,
+            "inharmonicity": 1.4
+          },
+          "envelope": { "attack": 0.012, "decay": 0.8, "sustain": 0.2, "release": 0.7 },
+          "volume": 0.3,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": { "type": "bandpass", "center": 6000.0, "resonance": 0.7 }
+          },
+          "envelope": { "attack": 0.01, "decay": 0.15, "sustain": 0.0, "release": 0.05 },
+          "volume": 0.25,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

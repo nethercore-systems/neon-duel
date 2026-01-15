@@ -1,0 +1,49 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_perc_soft",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60051,
+  "description": "Warm soft percussion click with body",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_perc_soft.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 0.2,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sine", "frequency": 600.0},
+          "envelope": {"attack": 0.003, "decay": 0.08, "sustain": 0.0, "release": 0.06},
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "triangle", "frequency": 900.0},
+          "envelope": {"attack": 0.002, "decay": 0.06, "sustain": 0.0, "release": 0.05},
+          "volume": 0.3,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "triangle", "frequency": 902.6},
+          "envelope": {"attack": 0.003, "decay": 0.06, "sustain": 0.0, "release": 0.05},
+          "volume": 0.2,
+          "pan": -0.2
+        },
+        {
+          "synthesis": {"type": "noise_burst", "noise_type": "pink", "filter": {"type": "bandpass", "center": 1500.0, "resonance": 0.4}},
+          "envelope": {"attack": 0.002, "decay": 0.07, "sustain": 0.0, "release": 0.06},
+          "volume": 0.25,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "fm_synth", "carrier_freq": 750.0, "modulator_freq": 450.0, "modulation_index": 1.8},
+          "envelope": {"attack": 0.001, "decay": 0.05, "sustain": 0.0, "release": 0.04},
+          "volume": 0.2,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

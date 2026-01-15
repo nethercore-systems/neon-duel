@@ -1,0 +1,32 @@
+{
+  "report_version": 1,
+  "spec_hash": "e988f5f5ca4eb9addba46517b9998d867eab5246eae75584ec53ae6d9c982494",
+  "asset_id": "music_ring",
+  "asset_type": "music",
+  "license": "CC0-1.0",
+  "seed": 50003,
+  "recipe_kind": "music.tracker_song_compose_v1",
+  "recipe_hash": "b44046795a2e02ad8f8a9ae4b7e4c50d0aee138e986cb2585a3b6e11dfdb2a47",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "xm",
+      "path": "assets/generated/music_ring.xm",
+      "hash": "da20c968593f0019864abd890b2529bdc99e60fc901c17b061c44fa6850cbdee"
+    },
+    {
+      "kind": "metadata",
+      "format": "json",
+      "path": "assets/generated/music_ring.xm.loops.json",
+      "hash": "ef7da159e5565085fb89b91ebdc58cb796f84e5a429607f94181d6dc60499195"
+    }
+  ],
+  "duration_ms": 1710,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

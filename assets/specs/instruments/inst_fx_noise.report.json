@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "299ac8f74eeabdc55d2b0a5a211fa592f3009fbb1e9d8eccdede3df62c3ccd02",
+  "asset_id": "inst_fx_noise",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60043,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "1d899ac5e7f9aec815f608d4c8019fd941f21250379db40aa23dd74e43b52f7e",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_fx_noise.wav",
+      "hash": "cf5da15d7a036ec649fa411febcd4d47883faff6616ea0fcd911a60b85a3d814"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

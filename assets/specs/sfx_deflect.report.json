@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "81a5b90f5ad93508000091638258e99a6bebcd83fa297415b826b5aa58ff815a",
+  "asset_id": "sfx_deflect",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42004,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "4d19c080ad6bd6dfbb2b6a05fab72ede609a8a5e24ee5ad35906329e75e96682",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/sfx_deflect.wav",
+      "hash": "b6455493fdb401bc4f0b8241d6541b9643f142a7d9c16705d4137b3cf209b691"
+    }
+  ],
+  "duration_ms": 8,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "0014d44f22b520e717478b51d1e03a332f21f2c2b242dca4eefcdb57ca805dcc",
+  "asset_id": "inst_bass_sub",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60012,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "3acfc7b476cb2e0fd51f400efd140ded43c8cee03f1d817eb3504dc325740d32",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_bass_sub.wav",
+      "hash": "eff3f1c1b6b3ad6a451acfdcd1d277f1fd1a74bd59e354a2aaae956623719354"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

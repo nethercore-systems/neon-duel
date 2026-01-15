@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "1c066e55ac0ec2331de55698e9668ca2556371e4a9dd9ae9b5a821e8a6e058b0",
+  "asset_id": "inst_arp_grid",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60042,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "0f2cd1646d5bc3ea47df6afaf8d2a9ee7222643ce52d3de06dfa04db8b36704f",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_arp_grid.wav",
+      "hash": "f61a806553e1c63fd1724bc3468713f7a928499de6413aead71067a395e7046e"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

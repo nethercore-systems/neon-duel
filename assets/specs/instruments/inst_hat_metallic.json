@@ -1,0 +1,62 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_hat_metallic",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60003,
+  "description": "Shimmering metallic hi-hat with multiple partials",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_hat_metallic.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "F#5",
+      "duration_seconds": 0.12,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 5000.0,
+            "num_partials": 10,
+            "inharmonicity": 2.4
+          },
+          "envelope": {"attack": 0.001, "decay": 0.05, "sustain": 0.0, "release": 0.06},
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 7500.0,
+            "num_partials": 8,
+            "inharmonicity": 2.8
+          },
+          "envelope": {"attack": 0.001, "decay": 0.04, "sustain": 0.0, "release": 0.05},
+          "volume": 0.4,
+          "pan": 0.1
+        },
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 3500.0,
+            "num_partials": 6,
+            "inharmonicity": 2.1
+          },
+          "envelope": {"attack": 0.001, "decay": 0.045, "sustain": 0.0, "release": 0.055},
+          "volume": 0.35,
+          "pan": -0.1
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": {"type": "highpass", "cutoff": 8000.0, "resonance": 0.4}
+          },
+          "envelope": {"attack": 0.001, "decay": 0.03, "sustain": 0.0, "release": 0.04},
+          "volume": 0.3,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

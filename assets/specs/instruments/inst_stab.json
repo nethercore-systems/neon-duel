@@ -1,0 +1,49 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_stab",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60040,
+  "description": "Punchy brass-like synth stab with instant attack and harmonic bite",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_stab.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 0.5,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 261.63},
+          "envelope": {"attack": 0.001, "decay": 0.2, "sustain": 0.0, "release": 0.15},
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 263.44},
+          "envelope": {"attack": 0.001, "decay": 0.2, "sustain": 0.0, "release": 0.15},
+          "volume": 0.3,
+          "pan": -0.3
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 259.83},
+          "envelope": {"attack": 0.001, "decay": 0.2, "sustain": 0.0, "release": 0.15},
+          "volume": 0.3,
+          "pan": 0.3
+        },
+        {
+          "synthesis": {"type": "fm_synth", "carrier_freq": 261.63, "modulator_freq": 523.26, "modulation_index": 6.0},
+          "envelope": {"attack": 0.001, "decay": 0.15, "sustain": 0.0, "release": 0.1},
+          "volume": 0.4,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "square", "frequency": 130.81, "duty": 0.5},
+          "envelope": {"attack": 0.001, "decay": 0.25, "sustain": 0.0, "release": 0.2},
+          "volume": 0.25,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

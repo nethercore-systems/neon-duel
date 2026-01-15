@@ -1,0 +1,83 @@
+{
+  "spec_version": 1,
+  "asset_id": "sfx_hit",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42002,
+  "description": "Melee hit and bullet impact - Professional heavy impact with sub-bass thud, mid crack, body, and presence",
+  "outputs": [
+    { "kind": "primary", "format": "wav", "path": "assets/generated/sfx_hit.wav" }
+  ],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 0.16,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 65.0,
+            "modulator_freq": 32.5,
+            "modulation_index": 15.0
+          },
+          "envelope": { "attack": 0.0, "decay": 0.12, "sustain": 0.0, "release": 0.04 },
+          "volume": 0.95,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "triangle",
+            "frequency": 130.0
+          },
+          "envelope": { "attack": 0.0, "decay": 0.1, "sustain": 0.0, "release": 0.03 },
+          "volume": 0.65,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": { "type": "bandpass", "center": 1800.0, "resonance": 1.4 }
+          },
+          "envelope": { "attack": 0.0, "decay": 0.045, "sustain": 0.0, "release": 0.015 },
+          "volume": 0.75,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "pink",
+            "filter": { "type": "lowpass", "cutoff": 400.0, "resonance": 0.6 }
+          },
+          "envelope": { "attack": 0.0, "decay": 0.1, "sustain": 0.0, "release": 0.02 },
+          "volume": 0.55,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 260.0,
+            "modulator_freq": 520.0,
+            "modulation_index": 7.0
+          },
+          "envelope": { "attack": 0.0, "decay": 0.06, "sustain": 0.0, "release": 0.02 },
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": { "type": "highpass", "cutoff": 6000.0, "resonance": 0.5 }
+          },
+          "envelope": { "attack": 0.0, "decay": 0.02, "sustain": 0.0, "release": 0.01 },
+          "volume": 0.4,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

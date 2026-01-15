@@ -1,0 +1,43 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_fx_riser",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60041,
+  "description": "Dramatic tension-building riser with filtered noise sweep",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_fx_riser.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 2.0,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "noise_burst", "noise_type": "white", "filter": {"type": "bandpass", "center": 300.0, "resonance": 0.8}},
+          "envelope": {"attack": 1.8, "decay": 0.1, "sustain": 0.0, "release": 0.1},
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 65.41},
+          "envelope": {"attack": 1.6, "decay": 0.2, "sustain": 0.0, "release": 0.2},
+          "volume": 0.3,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 65.79},
+          "envelope": {"attack": 1.65, "decay": 0.2, "sustain": 0.0, "release": 0.2},
+          "volume": 0.2,
+          "pan": -0.3
+        },
+        {
+          "synthesis": {"type": "noise_burst", "noise_type": "pink", "filter": {"type": "bandpass", "center": 2000.0, "resonance": 0.7}},
+          "envelope": {"attack": 1.7, "decay": 0.15, "sustain": 0.0, "release": 0.15},
+          "volume": 0.4,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

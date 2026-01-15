@@ -1,0 +1,43 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_fx_sweep",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60042,
+  "description": "Smooth filter sweep effect moving through frequency spectrum",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_fx_sweep.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 1.5,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "noise_burst", "noise_type": "pink", "filter": {"type": "bandpass", "center": 800.0, "resonance": 0.85}},
+          "envelope": {"attack": 0.3, "decay": 0.7, "sustain": 0.2, "release": 0.5},
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 130.81},
+          "envelope": {"attack": 0.4, "decay": 0.6, "sustain": 0.15, "release": 0.5},
+          "volume": 0.3,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 131.94},
+          "envelope": {"attack": 0.42, "decay": 0.6, "sustain": 0.15, "release": 0.5},
+          "volume": 0.2,
+          "pan": -0.3
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sine", "frequency": 261.63},
+          "envelope": {"attack": 0.35, "decay": 0.65, "sustain": 0.1, "release": 0.5},
+          "volume": 0.25,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

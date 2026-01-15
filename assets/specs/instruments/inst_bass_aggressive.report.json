@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "1701827b32f2c546d7586e3b6c6bd107310831b580689440992f9a3a7906f9b7",
+  "asset_id": "inst_bass_aggressive",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60011,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "fbe7b67da0c5084cad74a308734152b501f6a639fa87274fbdff641a6488aa94",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_bass_aggressive.wav",
+      "hash": "dac36c1d73f7ecc84a27d5caa61136b06b1217998c96bd8a6b5fb29985407cd3"
+    }
+  ],
+  "duration_ms": 2,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

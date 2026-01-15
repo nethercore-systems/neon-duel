@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "2ce784aebf97208321ec55aae0c0ef89d8fa742e9ba60f8536b40f9d82f037ca",
+  "asset_id": "sfx_countdown",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42006,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "184accff3a280c3730de3d8606266129e95acc1b18eff6513166ea5a1342e664",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/sfx_countdown.wav",
+      "hash": "08fbf9be5fcbaab710d66349493a285e26533840d13af2c516d3edea16ab71a4"
+    }
+  ],
+  "duration_ms": 0,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "83de6e5acd74a0e92f56de6aa64748e726634d5cb1e10d37a18e7809d94841d2",
+  "asset_id": "inst_pad_dark",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60032,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "5a49aa4f9ceee9ef0157fdb90bac34818402bfacf78efc29222771c63f98f78e",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_pad_dark.wav",
+      "hash": "a5a630c080bb1f979e1526ed2c39707c3ee5f23134122e07e2c7abe8dc7821f3"
+    }
+  ],
+  "duration_ms": 9,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

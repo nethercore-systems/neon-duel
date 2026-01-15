@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "c643ce23217caf245ee84b5607b19c632b1298d897acaac27170cac267f26546",
+  "asset_id": "inst_arp_void",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60041,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "f7ac481fad925d8b16645adc0032b3dd517ac14bf806904c387b91a1a8b3da62",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_arp_void.wav",
+      "hash": "87c2bb5671c8b259d4ccc0ff967c3b57e9b32e9f4a0a0add386e28ff4eb6032c"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

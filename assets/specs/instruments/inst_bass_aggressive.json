@@ -1,0 +1,49 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_bass_aggressive",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60011,
+  "description": "Growling reese-style bass with FM modulation",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_bass_aggressive.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C2",
+      "duration_seconds": 1.0,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "fm_synth", "carrier_freq": 65.41, "modulator_freq": 196.23, "modulation_index": 4.5},
+          "envelope": {"attack": 0.005, "decay": 0.18, "sustain": 0.68, "release": 0.15},
+          "volume": 0.6,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 65.41},
+          "envelope": {"attack": 0.008, "decay": 0.22, "sustain": 0.62, "release": 0.17},
+          "volume": 0.35,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 66.18},
+          "envelope": {"attack": 0.01, "decay": 0.22, "sustain": 0.62, "release": 0.17},
+          "volume": 0.2,
+          "pan": -0.3
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 64.65},
+          "envelope": {"attack": 0.01, "decay": 0.22, "sustain": 0.62, "release": 0.17},
+          "volume": 0.2,
+          "pan": 0.3
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sine", "frequency": 65.41},
+          "envelope": {"attack": 0.01, "decay": 0.15, "sustain": 0.7, "release": 0.12},
+          "volume": 0.5,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

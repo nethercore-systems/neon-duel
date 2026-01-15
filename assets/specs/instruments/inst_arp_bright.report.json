@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "f71104566f46ab83e434817306efab764a8210f934119954d5d253aea7e0224c",
+  "asset_id": "inst_arp_bright",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60040,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "bf75ec92ffae5fcb6647c059b4850037f714e4f0ad6dfa48696646fbb9adfc82",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_arp_bright.wav",
+      "hash": "a0c36b94cf71f346d8718d2236361958cf481cd436b405cba104676157b89dbf"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

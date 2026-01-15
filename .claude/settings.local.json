@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(speccade generate-all:*)",
+      "Bash(speccade generate:*)"
+    ]
+  }
+}

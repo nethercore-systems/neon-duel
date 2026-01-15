@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "61d0314319ebde8f70be4db153aac141d35cd3b111551f590dc64a06eebaf6a5",
+  "asset_id": "sfx_go",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42007,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "67802f121dd96abc71c86f294eaa45db8c38ccb37388baafc6c60386dd98ff84",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/sfx_go.wav",
+      "hash": "22035716dcb30573fb86d870a7f1c1c9541e6c1092e5866691595df85f4c93f3"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

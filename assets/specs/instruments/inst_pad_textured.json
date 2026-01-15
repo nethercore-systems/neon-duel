@@ -1,0 +1,55 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_pad_textured",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60033,
+  "description": "Evolving textured pad with atmospheric noise and movement",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_pad_textured.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C3",
+      "duration_seconds": 3.5,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 130.81},
+          "envelope": {"attack": 0.9, "decay": 0.4, "sustain": 0.75, "release": 1.2},
+          "volume": 0.25,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 132.73},
+          "envelope": {"attack": 0.95, "decay": 0.4, "sustain": 0.75, "release": 1.2},
+          "volume": 0.18,
+          "pan": -0.35
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 128.92},
+          "envelope": {"attack": 0.95, "decay": 0.4, "sustain": 0.75, "release": 1.2},
+          "volume": 0.18,
+          "pan": 0.35
+        },
+        {
+          "synthesis": {"type": "fm_synth", "carrier_freq": 130.81, "modulator_freq": 196.22, "modulation_index": 2.5},
+          "envelope": {"attack": 1.0, "decay": 0.5, "sustain": 0.7, "release": 1.1},
+          "volume": 0.25,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "noise_burst", "noise_type": "pink", "filter": {"type": "lowpass", "cutoff": 3000.0, "resonance": 0.2}},
+          "envelope": {"attack": 0.8, "decay": 0.6, "sustain": 0.5, "release": 1.0},
+          "volume": 0.12,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sine", "frequency": 130.81},
+          "envelope": {"attack": 0.6, "decay": 0.3, "sustain": 0.85, "release": 0.9},
+          "volume": 0.35,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

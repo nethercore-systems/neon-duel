@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "c181664b5bc2b566c3f94b88bb72f65537f0b7c27eb3d85314634cac420779c4",
+  "asset_id": "inst_kick_fm",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60001,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "91465df4c8f63835cb109c02bd6d1e9b5f86fa728b3275b860a9f7c172382fdf",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_kick_fm.wav",
+      "hash": "6388e27bd34b17bc3a143724ff4080dc820a5674f96f047118f2c8ea5d4a59a4"
+    }
+  ],
+  "duration_ms": 2,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

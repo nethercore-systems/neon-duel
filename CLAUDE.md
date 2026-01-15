@@ -117,7 +117,7 @@ Use `random()`, `random_range()`, `random_f32()` from FFI for deterministic RNG.
 ## Asset Pipeline
 
 SFX and music generated via Speccade specs in `assets/specs/`.
-Run `speccade generate --spec-dir assets/specs/ --out-root assets/generated/` to regenerate.
+Run `speccade generate-all --spec-dir assets/specs/ --out-root assets/generated/` to regenerate.
 
 ## Iteration Tips
 

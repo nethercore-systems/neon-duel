@@ -1,0 +1,760 @@
+{
+  "spec_version": 1,
+  "asset_id": "music_ring",
+  "asset_type": "music",
+  "license": "CC0-1.0",
+  "seed": 50003,
+  "description": "NEON DUEL Ring Void stage theme - dark atmospheric cosmic horror, Locrian mode, polyrhythmic ritual percussion",
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "xm",
+      "path": "assets/generated/music_ring.xm"
+    }
+  ],
+  "recipe": {
+    "kind": "music.tracker_song_compose_v1",
+    "params": {
+      "format": "xm",
+      "bpm": 100,
+      "speed": 6,
+      "channels": 8,
+      "loop": true,
+      "name": "RING VOID",
+      "channel_ids": {
+        "pad_dark": 0,
+        "pad_textured": 1,
+        "pad_void": 2,
+        "sub_void": 3,
+        "bass_dark": 4,
+        "arp_void": 5,
+        "lead_mystery": 6,
+        "perc_deep": 7
+      },
+      "instrument_ids": {
+        "pad_dark": 0,
+        "pad_textured": 1,
+        "pad_void": 2,
+        "sub_void": 3,
+        "bass_dark": 4,
+        "arp_void": 5,
+        "lead_mystery": 6,
+        "perc_deep": 7
+      },
+      "timebase": {
+        "beats_per_bar": 4,
+        "rows_per_beat": 4
+      },
+      "instruments": [
+        {
+          "name": "pad_dark",
+          "ref": "instruments/inst_pad_dark.json"
+        },
+        {
+          "name": "pad_textured",
+          "ref": "instruments/inst_pad_textured.json"
+        },
+        {
+          "name": "pad_void",
+          "ref": "instruments/inst_pad_void.json"
+        },
+        {
+          "name": "sub_void",
+          "ref": "instruments/inst_sub_void.json"
+        },
+        {
+          "name": "bass_dark",
+          "ref": "instruments/inst_bass_dark.json"
+        },
+        {
+          "name": "arp_void",
+          "ref": "instruments/inst_arp_void.json"
+        },
+        {
+          "name": "lead_mystery",
+          "ref": "instruments/inst_lead_mystery.json"
+        },
+        {
+          "name": "perc_deep",
+          "ref": "instruments/inst_perc_deep.json"
+        }
+      ],
+      "defs": {
+        "pad_cluster_1": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 0,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_dark",
+                "note": "A1",
+                "inst": "pad_dark",
+                "vol": 28
+              }
+            },
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 2,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_dark",
+                "note": "Bb1",
+                "inst": "pad_dark",
+                "vol": 24
+              }
+            },
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 4,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_dark",
+                "note": "Eb2",
+                "inst": "pad_dark",
+                "vol": 26
+              }
+            }
+          ]
+        },
+        "pad_cluster_2": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 6,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_textured",
+                "note": "D2",
+                "inst": "pad_textured",
+                "vol": 22
+              }
+            },
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 10,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_textured",
+                "note": "Eb2",
+                "inst": "pad_textured",
+                "vol": 20
+              }
+            },
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 14,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_textured",
+                "note": "G2",
+                "inst": "pad_textured",
+                "vol": 24
+              }
+            }
+          ]
+        },
+        "pad_cluster_3_climax": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 0,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_void",
+                "note": "C2",
+                "inst": "pad_void",
+                "vol": 30
+              }
+            },
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 8,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_void",
+                "note": "F2",
+                "inst": "pad_void",
+                "vol": 28
+              }
+            },
+            {
+              "op": "emit",
+              "at": {
+                "op": "range",
+                "start": 16,
+                "step": 64,
+                "count": 1
+              },
+              "cell": {
+                "channel": "pad_void",
+                "note": "Ab2",
+                "inst": "pad_void",
+                "vol": 26
+              }
+            }
+          ]
+        },
+        "sub_drone_a": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 256,
+            "count": 1
+          },
+          "cell": {
+            "channel": "sub_void",
+            "note": "A0",
+            "inst": "sub_void",
+            "vol": 46
+          }
+        },
+        "sub_drone_bb": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 256,
+            "count": 1
+          },
+          "cell": {
+            "channel": "sub_void",
+            "note": "Bb0",
+            "inst": "sub_void",
+            "vol": 46
+          }
+        },
+        "sub_tritone_pulses": {
+          "op": "emit_seq",
+          "at": {
+            "op": "euclid",
+            "pulses": 7,
+            "steps": 16,
+            "stride": 4
+          },
+          "cell": {
+            "channel": "sub_void",
+            "inst": "sub_void",
+            "vol": 42
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "A0",
+              "Eb0",
+              "Bb0",
+              "Eb0"
+            ]
+          }
+        },
+        "bass_slow_a": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 256,
+            "count": 1
+          },
+          "cell": {
+            "channel": "bass_dark",
+            "note": "A0",
+            "inst": "bass_dark",
+            "vol": 38
+          }
+        },
+        "bass_slow_bb": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 256,
+            "count": 1
+          },
+          "cell": {
+            "channel": "bass_dark",
+            "note": "Bb0",
+            "inst": "bass_dark",
+            "vol": 38
+          }
+        },
+        "bass_slow_ab": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 128,
+            "step": 256,
+            "count": 1
+          },
+          "cell": {
+            "channel": "bass_dark",
+            "note": "G#0",
+            "inst": "bass_dark",
+            "vol": 36
+          }
+        },
+        "arp_sparse_locrian": {
+          "op": "prob",
+          "p_permille": 400,
+          "seed_salt": "arp_sparse",
+          "body": {
+            "op": "emit_seq",
+            "at": {
+              "op": "euclid",
+              "pulses": 3,
+              "steps": 16,
+              "stride": 4
+            },
+            "cell": {
+              "channel": "arp_void",
+              "inst": "arp_void",
+              "vol": 24
+            },
+            "note_seq": {
+              "mode": "cycle",
+              "values": [
+                "A3",
+                "Bb3",
+                "C4",
+                "D4",
+                "Eb4"
+              ]
+            }
+          }
+        },
+        "arp_dense_locrian": {
+          "op": "prob",
+          "p_permille": 400,
+          "seed_salt": "arp_dense",
+          "body": {
+            "op": "emit_seq",
+            "at": {
+              "op": "euclid",
+              "pulses": 11,
+              "steps": 16,
+              "stride": 4
+            },
+            "cell": {
+              "channel": "arp_void",
+              "inst": "arp_void",
+              "vol": 28
+            },
+            "note_seq": {
+              "mode": "cycle",
+              "values": [
+                "A3",
+                "Bb3",
+                "C4",
+                "D4",
+                "Eb4",
+                "F4",
+                "G4"
+              ]
+            }
+          }
+        },
+        "melody_descent": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              64,
+              128
+            ]
+          },
+          "cell": {
+            "channel": "lead_mystery",
+            "inst": "lead_mystery",
+            "vol": 32
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E5",
+              "D5",
+              "C5"
+            ]
+          }
+        },
+        "melody_octave_leap": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              32
+            ]
+          },
+          "cell": {
+            "channel": "lead_mystery",
+            "inst": "lead_mystery",
+            "vol": 34
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "A3",
+              "A4"
+            ]
+          }
+        },
+        "melody_tritone_question": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 8,
+            "count": 8
+          },
+          "cell": {
+            "channel": "lead_mystery",
+            "inst": "lead_mystery",
+            "vol": 36
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "A4",
+              "Eb5",
+              "A4",
+              "Eb5"
+            ]
+          }
+        },
+        "perc_poly_layer_1": {
+          "op": "emit",
+          "at": {
+            "op": "euclid",
+            "pulses": 5,
+            "steps": 13,
+            "stride": 4
+          },
+          "cell": {
+            "channel": "perc_deep",
+            "note": "C3",
+            "inst": "perc_deep",
+            "vol": 26
+          }
+        },
+        "perc_poly_layer_2": {
+          "op": "emit",
+          "at": {
+            "op": "euclid",
+            "pulses": 3,
+            "steps": 8,
+            "stride": 4
+          },
+          "cell": {
+            "channel": "perc_deep",
+            "note": "C2",
+            "inst": "perc_deep",
+            "vol": 22
+          }
+        },
+        "perc_metallic_climax": {
+          "op": "prob",
+          "p_permille": 200,
+          "seed_salt": "metallic",
+          "body": {
+            "op": "emit",
+            "at": {
+              "op": "range",
+              "start": 0,
+              "step": 2,
+              "count": 32
+            },
+            "cell": {
+              "channel": "perc_deep",
+              "note": "C4",
+              "inst": "perc_deep",
+              "vol": 16
+            }
+          }
+        },
+        "noise_texture_void": {
+          "op": "prob",
+          "p_permille": 150,
+          "seed_salt": "noise_void",
+          "body": {
+            "op": "emit",
+            "at": {
+              "op": "range",
+              "start": 0,
+              "step": 4,
+              "count": 16
+            },
+            "cell": {
+              "channel": "pad_textured",
+              "note": "C1",
+              "inst": "pad_textured",
+              "vol": 12
+            }
+          }
+        },
+        "noise_texture_emergence": {
+          "op": "prob",
+          "p_permille": 300,
+          "seed_salt": "noise_emerge",
+          "body": {
+            "op": "emit",
+            "at": {
+              "op": "range",
+              "start": 0,
+              "step": 4,
+              "count": 16
+            },
+            "cell": {
+              "channel": "pad_textured",
+              "note": "C1",
+              "inst": "pad_textured",
+              "vol": 16
+            }
+          }
+        },
+        "noise_texture_climax": {
+          "op": "prob",
+          "p_permille": 500,
+          "seed_salt": "noise_climax",
+          "body": {
+            "op": "emit",
+            "at": {
+              "op": "range",
+              "start": 0,
+              "step": 2,
+              "count": 32
+            },
+            "cell": {
+              "channel": "pad_textured",
+              "note": "C1",
+              "inst": "pad_textured",
+              "vol": 20
+            }
+          }
+        }
+      },
+      "patterns": {
+        "void": {
+          "bars": 16,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "noise_texture_void"
+              }
+            ]
+          }
+        },
+        "emergence": {
+          "bars": 16,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cluster_1"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cluster_2"
+              },
+              {
+                "op": "ref",
+                "name": "arp_sparse_locrian"
+              },
+              {
+                "op": "ref",
+                "name": "perc_poly_layer_1"
+              },
+              {
+                "op": "ref",
+                "name": "melody_descent"
+              },
+              {
+                "op": "ref",
+                "name": "noise_texture_emergence"
+              }
+            ]
+          }
+        },
+        "presence": {
+          "bars": 16,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "sub_drone_bb"
+              },
+              {
+                "op": "ref",
+                "name": "bass_slow_bb"
+              },
+              {
+                "op": "ref",
+                "name": "sub_tritone_pulses"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cluster_1"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cluster_2"
+              },
+              {
+                "op": "ref",
+                "name": "arp_sparse_locrian"
+              },
+              {
+                "op": "ref",
+                "name": "perc_poly_layer_1"
+              },
+              {
+                "op": "ref",
+                "name": "perc_poly_layer_2"
+              },
+              {
+                "op": "ref",
+                "name": "melody_octave_leap"
+              },
+              {
+                "op": "ref",
+                "name": "noise_texture_emergence"
+              }
+            ]
+          }
+        },
+        "convergence": {
+          "bars": 16,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "sub_drone_bb"
+              },
+              {
+                "op": "ref",
+                "name": "bass_slow_bb"
+              },
+              {
+                "op": "ref",
+                "name": "bass_slow_ab"
+              },
+              {
+                "op": "ref",
+                "name": "sub_tritone_pulses"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cluster_1"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cluster_2"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cluster_3_climax"
+              },
+              {
+                "op": "ref",
+                "name": "arp_dense_locrian"
+              },
+              {
+                "op": "ref",
+                "name": "perc_poly_layer_1"
+              },
+              {
+                "op": "ref",
+                "name": "perc_poly_layer_2"
+              },
+              {
+                "op": "ref",
+                "name": "perc_metallic_climax"
+              },
+              {
+                "op": "ref",
+                "name": "melody_tritone_question"
+              },
+              {
+                "op": "ref",
+                "name": "noise_texture_climax"
+              }
+            ]
+          }
+        }
+      },
+      "arrangement": [
+        {
+          "pattern": "void",
+          "repeat": 1
+        },
+        {
+          "pattern": "emergence",
+          "repeat": 1
+        },
+        {
+          "pattern": "presence",
+          "repeat": 1
+        },
+        {
+          "pattern": "convergence",
+          "repeat": 1
+        }
+      ]
+    }
+  }
+}

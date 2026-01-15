@@ -1,0 +1,72 @@
+{
+  "spec_version": 1,
+  "asset_id": "sfx_countdown",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42006,
+  "description": "3-2-1 countdown beep - Professional clear digital beep with harmonics, FM texture, and presence",
+  "outputs": [
+    { "kind": "primary", "format": "wav", "path": "assets/generated/sfx_countdown.wav" }
+  ],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 0.12,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 1047.0
+          },
+          "envelope": { "attack": 0.002, "decay": 0.1, "sustain": 0.0, "release": 0.018 },
+          "volume": 0.75,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 2094.0
+          },
+          "envelope": { "attack": 0.002, "decay": 0.09, "sustain": 0.0, "release": 0.018 },
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 1047.0,
+            "modulator_freq": 3141.0,
+            "modulation_index": 2.8
+          },
+          "envelope": { "attack": 0.002, "decay": 0.095, "sustain": 0.0, "release": 0.015 },
+          "volume": 0.45,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 523.5
+          },
+          "envelope": { "attack": 0.002, "decay": 0.1, "sustain": 0.0, "release": 0.018 },
+          "volume": 0.35,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": { "type": "bandpass", "center": 7000.0, "resonance": 0.6 }
+          },
+          "envelope": { "attack": 0.0, "decay": 0.015, "sustain": 0.0, "release": 0.008 },
+          "volume": 0.25,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

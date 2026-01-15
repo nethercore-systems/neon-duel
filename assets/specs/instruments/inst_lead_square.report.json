@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "ae523c61ad6ee213746c54b60a8c7c1b8bc6b0fad7e59b389a359cba23cef236",
+  "asset_id": "inst_lead_square",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60022,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "2932e98d5d4b9c0a103d848d4c868e6650450187f1ea8247843ac769a3621ec1",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_lead_square.wav",
+      "hash": "b873af5b7b69c7cab0b49b30324378e07f2a1c4c22754a65ef4e5097a2e2809b"
+    }
+  ],
+  "duration_ms": 2,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

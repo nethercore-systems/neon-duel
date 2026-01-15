@@ -1,0 +1,1763 @@
+{
+  "spec_version": 1,
+  "asset_id": "music_scatter",
+  "asset_type": "music",
+  "license": "CC0-1.0",
+  "seed": 50002,
+  "description": "Scatter Field - E Phrygian Dominant with tritone stabs, breakbeat aggression, one-hit kill intensity",
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "xm",
+      "path": "assets/generated/music_scatter.xm"
+    }
+  ],
+  "recipe": {
+    "kind": "music.tracker_song_compose_v1",
+    "params": {
+      "format": "xm",
+      "bpm": 140,
+      "speed": 6,
+      "channels": 8,
+      "loop": true,
+      "name": "SCATTER FIELD",
+      "channel_ids": {
+        "kick": 0,
+        "snare": 1,
+        "hat": 2,
+        "bass": 3,
+        "lead": 4,
+        "stab": 5,
+        "crash": 6,
+        "fx": 7
+      },
+      "instrument_ids": {
+        "kick_fm": 0,
+        "snare_layered": 1,
+        "hat_metallic": 2,
+        "bass_aggressive": 3,
+        "lead_fm": 4,
+        "stab": 5,
+        "crash": 6,
+        "fx_riser": 7
+      },
+      "timebase": {
+        "beats_per_bar": 4,
+        "rows_per_beat": 4
+      },
+      "instruments": [
+        {
+          "name": "kick_fm",
+          "ref": "instruments/inst_kick_fm.json"
+        },
+        {
+          "name": "snare_layered",
+          "ref": "instruments/inst_snare_layered.json"
+        },
+        {
+          "name": "hat_metallic",
+          "ref": "instruments/inst_hat_metallic.json"
+        },
+        {
+          "name": "bass_aggressive",
+          "ref": "instruments/inst_bass_aggressive.json"
+        },
+        {
+          "name": "lead_fm",
+          "ref": "instruments/inst_lead_fm.json"
+        },
+        {
+          "name": "stab",
+          "ref": "instruments/inst_stab.json"
+        },
+        {
+          "name": "crash",
+          "ref": "instruments/inst_crash.json"
+        },
+        {
+          "name": "fx_riser",
+          "ref": "instruments/inst_fx_riser.json"
+        }
+      ],
+      "defs": {
+        "kick_breakbeat": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              3,
+              6,
+              10,
+              12,
+              14,
+              18,
+              22,
+              24,
+              27,
+              30,
+              34,
+              36,
+              38,
+              42,
+              46,
+              48,
+              51,
+              54,
+              58,
+              60,
+              62
+            ]
+          },
+          "cell": {
+            "channel": "kick",
+            "note": "C2",
+            "inst": "kick_fm",
+            "vol": 64
+          }
+        },
+        "snare_backbeat": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              8,
+              24,
+              40,
+              56
+            ]
+          },
+          "cell": {
+            "channel": "snare",
+            "note": "C4",
+            "inst": "snare_layered",
+            "vol": 58
+          }
+        },
+        "snare_euclid_9": {
+          "op": "emit",
+          "at": {
+            "op": "euclid",
+            "pulses": 9,
+            "steps": 16,
+            "stride": 4,
+            "rotate": 1
+          },
+          "cell": {
+            "channel": "snare",
+            "note": "C4",
+            "inst": "snare_layered",
+            "vol": 50
+          }
+        },
+        "snare_ghost": {
+          "op": "prob",
+          "p_permille": 600,
+          "seed_salt": "snare_ghost_dense",
+          "body": {
+            "op": "emit",
+            "at": {
+              "op": "range",
+              "start": 2,
+              "step": 4,
+              "count": 16
+            },
+            "cell": {
+              "channel": "snare",
+              "note": "C4",
+              "inst": "snare_layered",
+              "vol": 24
+            }
+          }
+        },
+        "snare_roll_climax": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 56,
+            "step": 1,
+            "count": 8
+          },
+          "cell": {
+            "channel": "snare",
+            "note": "C4",
+            "inst": "snare_layered",
+            "vol": 50
+          }
+        },
+        "snare_roll_intense": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 56,
+            "step": 1,
+            "count": 8
+          },
+          "cell": {
+            "channel": "snare",
+            "inst": "snare_layered",
+            "vol": 54
+          },
+          "vol_seq": {
+            "mode": "cycle",
+            "values": [
+              40,
+              44,
+              48,
+              50,
+              52,
+              54,
+              56,
+              58
+            ]
+          }
+        },
+        "hat_16ths": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 1,
+            "count": 64
+          },
+          "cell": {
+            "channel": "hat",
+            "note": "F#4",
+            "inst": "hat_metallic",
+            "vol": 32
+          }
+        },
+        "hat_downbeat_accent": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              16,
+              32,
+              48
+            ]
+          },
+          "cell": {
+            "channel": "hat",
+            "note": "F#4",
+            "inst": "hat_metallic",
+            "vol": 54
+          }
+        },
+        "hat_upbeat_accent": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              8,
+              24,
+              40,
+              56
+            ]
+          },
+          "cell": {
+            "channel": "hat",
+            "note": "F#4",
+            "inst": "hat_metallic",
+            "vol": 44
+          }
+        },
+        "crash_impact": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "crash",
+            "note": "C5",
+            "inst": "crash",
+            "vol": 52
+          }
+        },
+        "crash_section": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              32
+            ]
+          },
+          "cell": {
+            "channel": "crash",
+            "note": "C5",
+            "inst": "crash",
+            "vol": 48
+          }
+        },
+        "bass_bars_1_2_e5": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_aggressive",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E2",
+              "---",
+              "E2",
+              "E3",
+              "---",
+              "E2",
+              "---",
+              "---",
+              "E1",
+              "---",
+              "E2",
+              "---",
+              "E2",
+              "---",
+              "F2",
+              "---"
+            ]
+          }
+        },
+        "bass_bars_3_4_f5": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_aggressive",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "F2",
+              "---",
+              "F2",
+              "F3",
+              "---",
+              "F2",
+              "---",
+              "---",
+              "F1",
+              "---",
+              "F2",
+              "---",
+              "F2",
+              "---",
+              "E2",
+              "---"
+            ]
+          }
+        },
+        "bass_bars_5_6_a5": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_aggressive",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "A1",
+              "---",
+              "A2",
+              "---",
+              "A2",
+              "A3",
+              "---",
+              "---",
+              "A2",
+              "---",
+              "A2",
+              "Bb2",
+              "---",
+              "C2",
+              "---",
+              "---"
+            ]
+          }
+        },
+        "bass_bars_7_8_c_d": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_aggressive",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C2",
+              "---",
+              "C2",
+              "C3",
+              "---",
+              "C2",
+              "---",
+              "---",
+              "D2",
+              "---",
+              "D2",
+              "Bb1",
+              "---",
+              "E2",
+              "---",
+              "---"
+            ]
+          }
+        },
+        "bass_16th_burst_1": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 1,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_aggressive",
+            "vol": 54
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E2",
+              "E2",
+              "E3",
+              "E2",
+              "---",
+              "E2",
+              "F2",
+              "---",
+              "E1",
+              "---",
+              "E2",
+              "---",
+              "E2",
+              "E2",
+              "F2",
+              "E2"
+            ]
+          }
+        },
+        "bass_16th_burst_2": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 16,
+            "step": 1,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_aggressive",
+            "vol": 54
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "F2",
+              "F2",
+              "F3",
+              "F2",
+              "---",
+              "F2",
+              "E2",
+              "---",
+              "A1",
+              "A2",
+              "A2",
+              "A3",
+              "Bb2",
+              "C2",
+              "---",
+              "---"
+            ]
+          }
+        },
+        "bass_chromatic_run": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 8
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_aggressive",
+            "vol": 58
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E2",
+              "F2",
+              "F#2",
+              "G2",
+              "G#2",
+              "A2",
+              "Bb2",
+              "B2"
+            ]
+          }
+        },
+        "lead_phrase_1_descending": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28,
+              32
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_fm",
+            "vol": 46
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E5",
+              "F5",
+              "E5",
+              "D5",
+              "Bb4",
+              "G#4",
+              "E4",
+              "F4",
+              "E4"
+            ]
+          }
+        },
+        "lead_phrase_2_tritone": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              28
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_fm",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E5",
+              "Bb5",
+              "E5",
+              "Bb5",
+              "D5",
+              "G#5",
+              "D5",
+              "G#5"
+            ]
+          }
+        },
+        "lead_phrase_3_chromatic": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_fm",
+            "vol": 50
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E5",
+              "F5",
+              "F#5",
+              "G5",
+              "G#5",
+              "A5",
+              "Bb5",
+              "B5",
+              "E5",
+              "F5",
+              "F#5",
+              "G5",
+              "G#5",
+              "Bb5",
+              "D5",
+              "E5"
+            ]
+          }
+        },
+        "lead_staccato_danger": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              2,
+              6,
+              8,
+              10,
+              14,
+              16,
+              18,
+              22,
+              24,
+              26,
+              30
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_fm",
+            "vol": 52
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E5",
+              "Bb5",
+              "E5",
+              "D5",
+              "G#5",
+              "D5",
+              "F5",
+              "Bb5",
+              "F5",
+              "E5",
+              "Bb5",
+              "E5"
+            ]
+          }
+        },
+        "stab_e5_bars_1_4": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              16,
+              32,
+              48
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "E3",
+            "inst": "stab",
+            "vol": 54
+          }
+        },
+        "stab_f5_bars_5_6": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              16
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "F3",
+            "inst": "stab",
+            "vol": 54
+          }
+        },
+        "stab_a5_bars_7_8": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              16
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "A2",
+            "inst": "stab",
+            "vol": 54
+          }
+        },
+        "stab_c5_bars_9_10": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              16
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "C3",
+            "inst": "stab",
+            "vol": 54
+          }
+        },
+        "stab_d5_bars_11_12": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              16
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "D3",
+            "inst": "stab",
+            "vol": 54
+          }
+        },
+        "stab_tritone_bars_13_14": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              8,
+              16,
+              24
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "inst": "stab",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "F3",
+              "Bb3",
+              "F3",
+              "Bb3"
+            ]
+          }
+        },
+        "stab_resolution_bars_15_16": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              8,
+              16,
+              24
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "inst": "stab",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E3",
+              "G#3",
+              "E3",
+              "G#3"
+            ]
+          }
+        },
+        "stab_eighth_aggressive": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 8,
+            "count": 8
+          },
+          "cell": {
+            "channel": "stab",
+            "inst": "stab",
+            "vol": 52
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E3",
+              "F3",
+              "E3",
+              "D3",
+              "C3",
+              "D3",
+              "F3",
+              "E3"
+            ]
+          }
+        },
+        "fx_riser_build": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 48,
+            "step": 2,
+            "count": 8
+          },
+          "cell": {
+            "channel": "fx",
+            "inst": "fx_riser",
+            "vol": 36
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E3",
+              "F3",
+              "G3",
+              "A3",
+              "Bb3",
+              "C4",
+              "D4",
+              "E4"
+            ]
+          }
+        },
+        "fx_riser_intense": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 56,
+            "step": 1,
+            "count": 8
+          },
+          "cell": {
+            "channel": "fx",
+            "inst": "fx_riser",
+            "vol": 42
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E3",
+              "F3",
+              "F#3",
+              "G3",
+              "G#3",
+              "A3",
+              "Bb3",
+              "B3"
+            ]
+          }
+        }
+      },
+      "patterns": {
+        "impact_bars_1_4": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_impact"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bars_1_2_e5"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_3_4_f5"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_1_descending"
+              },
+              {
+                "op": "ref",
+                "name": "stab_e5_bars_1_4"
+              }
+            ]
+          }
+        },
+        "impact_bars_5_8": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bars_5_6_a5"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_7_8_c_d"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_2_tritone"
+              },
+              {
+                "op": "ref",
+                "name": "stab_f5_bars_5_6"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "stab_a5_bars_7_8"
+                }
+              }
+            ]
+          }
+        },
+        "impact_bars_9_12": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bars_1_2_e5"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_3_4_f5"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_1_descending"
+              },
+              {
+                "op": "ref",
+                "name": "stab_c5_bars_9_10"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "stab_d5_bars_11_12"
+                }
+              }
+            ]
+          }
+        },
+        "impact_bars_13_16": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_roll_climax"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bars_5_6_a5"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_7_8_c_d"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_2_tritone"
+              },
+              {
+                "op": "ref",
+                "name": "stab_tritone_bars_13_14"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "stab_resolution_bars_15_16"
+                }
+              }
+            ]
+          }
+        },
+        "grind_bars_17_20": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_euclid_9"
+              },
+              {
+                "op": "ref",
+                "name": "snare_ghost"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_16th_burst_1"
+              },
+              {
+                "op": "shift",
+                "rows": 16,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_16th_burst_2"
+                }
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_5_6_a5"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_3_chromatic"
+              },
+              {
+                "op": "ref",
+                "name": "stab_eighth_aggressive"
+              }
+            ]
+          }
+        },
+        "grind_bars_21_24": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_euclid_9"
+              },
+              {
+                "op": "ref",
+                "name": "snare_ghost"
+              },
+              {
+                "op": "ref",
+                "name": "snare_roll_climax"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_16th_burst_1"
+              },
+              {
+                "op": "shift",
+                "rows": 16,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_16th_burst_2"
+                }
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_7_8_c_d"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_staccato_danger"
+              },
+              {
+                "op": "ref",
+                "name": "stab_eighth_aggressive"
+              }
+            ]
+          }
+        },
+        "grind_bars_25_28": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_euclid_9"
+              },
+              {
+                "op": "ref",
+                "name": "snare_ghost"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_16th_burst_1"
+              },
+              {
+                "op": "shift",
+                "rows": 16,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_16th_burst_2"
+                }
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_1_2_e5"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_3_chromatic"
+              },
+              {
+                "op": "ref",
+                "name": "stab_eighth_aggressive"
+              }
+            ]
+          }
+        },
+        "grind_bars_29_32": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_euclid_9"
+              },
+              {
+                "op": "ref",
+                "name": "snare_ghost"
+              },
+              {
+                "op": "ref",
+                "name": "snare_roll_intense"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_16th_burst_1"
+              },
+              {
+                "op": "shift",
+                "rows": 16,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_16th_burst_2"
+                }
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_chromatic_run"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_staccato_danger"
+              },
+              {
+                "op": "ref",
+                "name": "stab_eighth_aggressive"
+              },
+              {
+                "op": "ref",
+                "name": "fx_riser_build"
+              }
+            ]
+          }
+        },
+        "breakdown_bars_33_34": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bars_1_2_e5"
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_1_descending"
+              }
+            ]
+          }
+        },
+        "explosion_bars_35_40": {
+          "rows": 128,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_euclid_9"
+              },
+              {
+                "op": "ref",
+                "name": "snare_ghost"
+              },
+              {
+                "op": "shift",
+                "rows": 56,
+                "body": {
+                  "op": "ref",
+                  "name": "snare_roll_intense"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_impact"
+              },
+              {
+                "op": "shift",
+                "rows": 64,
+                "body": {
+                  "op": "ref",
+                  "name": "crash_section"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "bass_16th_burst_1"
+              },
+              {
+                "op": "shift",
+                "rows": 16,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_16th_burst_2"
+                }
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_5_6_a5"
+                }
+              },
+              {
+                "op": "shift",
+                "rows": 64,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_chromatic_run"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_3_chromatic"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "lead_staccato_danger"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "stab_eighth_aggressive"
+              },
+              {
+                "op": "shift",
+                "rows": 56,
+                "body": {
+                  "op": "ref",
+                  "name": "fx_riser_intense"
+                }
+              }
+            ]
+          }
+        },
+        "climax_bars_41_44": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_euclid_9"
+              },
+              {
+                "op": "ref",
+                "name": "snare_ghost"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_16th_burst_1"
+              },
+              {
+                "op": "shift",
+                "rows": 16,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_16th_burst_2"
+                }
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_bars_1_2_e5"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_staccato_danger"
+              },
+              {
+                "op": "ref",
+                "name": "stab_tritone_bars_13_14"
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "stab_resolution_bars_15_16"
+                }
+              }
+            ]
+          }
+        },
+        "climax_bars_45_48": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "kick_breakbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_backbeat"
+              },
+              {
+                "op": "ref",
+                "name": "snare_euclid_9"
+              },
+              {
+                "op": "ref",
+                "name": "snare_ghost"
+              },
+              {
+                "op": "ref",
+                "name": "snare_roll_intense"
+              },
+              {
+                "op": "ref",
+                "name": "hat_16ths"
+              },
+              {
+                "op": "ref",
+                "name": "hat_downbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "hat_upbeat_accent"
+              },
+              {
+                "op": "ref",
+                "name": "crash_section"
+              },
+              {
+                "op": "ref",
+                "name": "bass_16th_burst_1"
+              },
+              {
+                "op": "shift",
+                "rows": 16,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_16th_burst_2"
+                }
+              },
+              {
+                "op": "shift",
+                "rows": 32,
+                "body": {
+                  "op": "ref",
+                  "name": "bass_chromatic_run"
+                }
+              },
+              {
+                "op": "ref",
+                "name": "lead_phrase_3_chromatic"
+              },
+              {
+                "op": "ref",
+                "name": "stab_eighth_aggressive"
+              }
+            ]
+          }
+        }
+      },
+      "arrangement": [
+        {
+          "pattern": "impact_bars_1_4",
+          "repeat": 1
+        },
+        {
+          "pattern": "impact_bars_5_8",
+          "repeat": 1
+        },
+        {
+          "pattern": "impact_bars_9_12",
+          "repeat": 1
+        },
+        {
+          "pattern": "impact_bars_13_16",
+          "repeat": 1
+        },
+        {
+          "pattern": "grind_bars_17_20",
+          "repeat": 1
+        },
+        {
+          "pattern": "grind_bars_21_24",
+          "repeat": 1
+        },
+        {
+          "pattern": "grind_bars_25_28",
+          "repeat": 1
+        },
+        {
+          "pattern": "grind_bars_29_32",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_bars_33_34",
+          "repeat": 1
+        },
+        {
+          "pattern": "explosion_bars_35_40",
+          "repeat": 1
+        },
+        {
+          "pattern": "climax_bars_41_44",
+          "repeat": 1
+        },
+        {
+          "pattern": "climax_bars_45_48",
+          "repeat": 1
+        }
+      ]
+    }
+  }
+}

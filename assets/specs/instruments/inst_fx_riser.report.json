@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "973d8692b18f8dc736c9d54031081a0a218809ca9470986b250718cb5275da4f",
+  "asset_id": "inst_fx_riser",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60041,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "ad33528d50613c67d1e1eef513766c383c9ae287c57edefa8376cd1a422d328b",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_fx_riser.wav",
+      "hash": "b4bd1b0831d99aeec19359c709e369652869727ffe3c197cec49ed7f5257a421"
+    }
+  ],
+  "duration_ms": 4,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

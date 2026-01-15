@@ -1,0 +1,49 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_lead_saw",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60020,
+  "description": "Professional supersaw lead - lush, detuned synthwave lead",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_lead_saw.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 1.5,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 261.63},
+          "envelope": {"attack": 0.015, "decay": 0.25, "sustain": 0.75, "release": 0.35},
+          "volume": 0.4,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 264.35},
+          "envelope": {"attack": 0.02, "decay": 0.25, "sustain": 0.75, "release": 0.35},
+          "volume": 0.25,
+          "pan": -0.4
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 258.93},
+          "envelope": {"attack": 0.02, "decay": 0.25, "sustain": 0.75, "release": 0.35},
+          "volume": 0.25,
+          "pan": 0.4
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 523.26},
+          "envelope": {"attack": 0.02, "decay": 0.2, "sustain": 0.4, "release": 0.3},
+          "volume": 0.15,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sine", "frequency": 261.63},
+          "envelope": {"attack": 0.01, "decay": 0.3, "sustain": 0.6, "release": 0.4},
+          "volume": 0.2,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

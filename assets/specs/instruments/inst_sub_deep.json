@@ -1,0 +1,49 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_sub_deep",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60014,
+  "description": "Ultra-low sub bass for impact with dual-sine reinforcement and sustained power",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_sub_deep.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C1",
+      "duration_seconds": 1.5,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 32.7
+          },
+          "envelope": {"attack": 0.03, "decay": 0.2, "sustain": 0.8, "release": 0.3},
+          "volume": 0.95,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 16.35
+          },
+          "envelope": {"attack": 0.04, "decay": 0.15, "sustain": 0.85, "release": 0.35},
+          "volume": 0.4,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "triangle",
+            "frequency": 32.7
+          },
+          "envelope": {"attack": 0.05, "decay": 0.25, "sustain": 0.6, "release": 0.25},
+          "volume": 0.3,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

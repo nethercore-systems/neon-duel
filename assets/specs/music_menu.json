@@ -1,0 +1,1423 @@
+{
+  "spec_version": 1,
+  "asset_id": "music_menu",
+  "asset_type": "music",
+  "license": "CC0-1.0",
+  "seed": 50000,
+  "description": "NEON DUEL menu theme - professional harmonic progression with voice-led pads and melodic development",
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "xm",
+      "path": "assets/generated/music_menu.xm"
+    }
+  ],
+  "recipe": {
+    "kind": "music.tracker_song_compose_v1",
+    "params": {
+      "format": "xm",
+      "bpm": 100,
+      "speed": 6,
+      "channels": 8,
+      "loop": true,
+      "name": "NEON DUEL",
+      "channel_ids": {
+        "pad_low": 0,
+        "pad_high": 1,
+        "arp": 2,
+        "lead": 3,
+        "bass": 4,
+        "perc": 5,
+        "stab": 6,
+        "sub": 7
+      },
+      "instrument_ids": {
+        "pad_warm": 0,
+        "pad_bright": 1,
+        "arp_bright": 2,
+        "lead_saw": 3,
+        "bass_multi": 4,
+        "perc_soft": 5,
+        "stab": 6,
+        "sub_deep": 7
+      },
+      "timebase": {
+        "beats_per_bar": 4,
+        "rows_per_beat": 4
+      },
+      "instruments": [
+        {
+          "name": "pad_warm",
+          "ref": "instruments/inst_pad_warm.json"
+        },
+        {
+          "name": "pad_bright",
+          "ref": "instruments/inst_pad_bright.json"
+        },
+        {
+          "name": "arp_bright",
+          "ref": "instruments/inst_arp_bright.json"
+        },
+        {
+          "name": "lead_saw",
+          "ref": "instruments/inst_lead_saw.json"
+        },
+        {
+          "name": "bass_multi",
+          "ref": "instruments/inst_bass_multi.json"
+        },
+        {
+          "name": "perc_soft",
+          "ref": "instruments/inst_perc_soft.json"
+        },
+        {
+          "name": "stab",
+          "ref": "instruments/inst_stab.json"
+        },
+        {
+          "name": "sub_deep",
+          "ref": "instruments/inst_sub_deep.json"
+        }
+      ],
+      "defs": {
+        "pad_low_chord_1_am": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad_low",
+            "note": "A2",
+            "inst": "pad_warm",
+            "vol": 30
+          }
+        },
+        "pad_low_chord_2_f": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad_low",
+            "note": "F2",
+            "inst": "pad_warm",
+            "vol": 30
+          }
+        },
+        "pad_low_chord_3_c": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad_low",
+            "note": "C3",
+            "inst": "pad_warm",
+            "vol": 30
+          }
+        },
+        "pad_low_chord_4_g": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad_low",
+            "note": "G2",
+            "inst": "pad_warm",
+            "vol": 30
+          }
+        },
+        "pad_high_chord_1_am": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad_high",
+            "note": "E3",
+            "inst": "pad_bright",
+            "vol": 26
+          }
+        },
+        "pad_high_chord_2_f": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad_high",
+            "note": "A3",
+            "inst": "pad_bright",
+            "vol": 26
+          }
+        },
+        "pad_high_chord_3_c": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad_high",
+            "note": "G3",
+            "inst": "pad_bright",
+            "vol": 26
+          }
+        },
+        "pad_high_chord_4_g": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad_high",
+            "note": "B3",
+            "inst": "pad_bright",
+            "vol": 26
+          }
+        },
+        "arp_am7": {
+          "op": "prob",
+          "p_permille": 850,
+          "seed_salt": "arp_am",
+          "body": {
+            "op": "emit_seq",
+            "at": {
+              "op": "euclid",
+              "pulses": 5,
+              "steps": 16,
+              "stride": 1
+            },
+            "cell": {
+              "channel": "arp",
+              "inst": "arp_bright",
+              "vol": 32
+            },
+            "note_seq": {
+              "mode": "cycle",
+              "values": [
+                "A4",
+                "C5",
+                "E5",
+                "G5"
+              ]
+            }
+          }
+        },
+        "arp_fmaj7": {
+          "op": "prob",
+          "p_permille": 850,
+          "seed_salt": "arp_f",
+          "body": {
+            "op": "emit_seq",
+            "at": {
+              "op": "euclid",
+              "pulses": 5,
+              "steps": 16,
+              "stride": 1
+            },
+            "cell": {
+              "channel": "arp",
+              "inst": "arp_bright",
+              "vol": 32
+            },
+            "note_seq": {
+              "mode": "cycle",
+              "values": [
+                "F4",
+                "A4",
+                "C5",
+                "E5"
+              ]
+            }
+          }
+        },
+        "arp_cmaj7": {
+          "op": "prob",
+          "p_permille": 850,
+          "seed_salt": "arp_c",
+          "body": {
+            "op": "emit_seq",
+            "at": {
+              "op": "euclid",
+              "pulses": 5,
+              "steps": 16,
+              "stride": 1
+            },
+            "cell": {
+              "channel": "arp",
+              "inst": "arp_bright",
+              "vol": 32
+            },
+            "note_seq": {
+              "mode": "cycle",
+              "values": [
+                "C4",
+                "E4",
+                "G4",
+                "B4"
+              ]
+            }
+          }
+        },
+        "arp_g7": {
+          "op": "prob",
+          "p_permille": 850,
+          "seed_salt": "arp_g",
+          "body": {
+            "op": "emit_seq",
+            "at": {
+              "op": "euclid",
+              "pulses": 5,
+              "steps": 16,
+              "stride": 1
+            },
+            "cell": {
+              "channel": "arp",
+              "inst": "arp_bright",
+              "vol": 32
+            },
+            "note_seq": {
+              "mode": "cycle",
+              "values": [
+                "G4",
+                "B4",
+                "D5",
+                "F5"
+              ]
+            }
+          }
+        },
+        "lead_motif_am": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 4,
+            "count": 8
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 38
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "E5",
+              "A5",
+              "G5",
+              "E5",
+              "D5",
+              "C5",
+              "---",
+              "E5"
+            ]
+          }
+        },
+        "lead_motif_f": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 4,
+            "count": 8
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 38
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "F5",
+              "A5",
+              "C6",
+              "A5",
+              "G5",
+              "F5",
+              "---",
+              "A5"
+            ]
+          }
+        },
+        "lead_motif_c": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 4,
+            "count": 8
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 38
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "G5",
+              "E5",
+              "D5",
+              "C5",
+              "E5",
+              "G5",
+              "---",
+              "B5"
+            ]
+          }
+        },
+        "lead_motif_g": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 4,
+            "count": 8
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 38
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "D5",
+              "B4",
+              "G4",
+              "D5",
+              "G5",
+              "B5",
+              "---",
+              "A5"
+            ]
+          }
+        },
+        "bass_euclid_am": {
+          "op": "emit",
+          "at": {
+            "op": "euclid",
+            "pulses": 3,
+            "steps": 8,
+            "stride": 4
+          },
+          "cell": {
+            "channel": "bass",
+            "note": "A1",
+            "inst": "bass_multi",
+            "vol": 42
+          }
+        },
+        "bass_euclid_f": {
+          "op": "emit",
+          "at": {
+            "op": "euclid",
+            "pulses": 3,
+            "steps": 8,
+            "stride": 4
+          },
+          "cell": {
+            "channel": "bass",
+            "note": "F1",
+            "inst": "bass_multi",
+            "vol": 42
+          }
+        },
+        "bass_euclid_c": {
+          "op": "emit",
+          "at": {
+            "op": "euclid",
+            "pulses": 3,
+            "steps": 8,
+            "stride": 4
+          },
+          "cell": {
+            "channel": "bass",
+            "note": "C2",
+            "inst": "bass_multi",
+            "vol": 42
+          }
+        },
+        "bass_euclid_g": {
+          "op": "emit",
+          "at": {
+            "op": "euclid",
+            "pulses": 3,
+            "steps": 8,
+            "stride": 4
+          },
+          "cell": {
+            "channel": "bass",
+            "note": "G1",
+            "inst": "bass_multi",
+            "vol": 42
+          }
+        },
+        "bass_8th_am": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "note": "A1",
+            "inst": "bass_multi",
+            "vol": 44
+          }
+        },
+        "bass_8th_f": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "note": "F1",
+            "inst": "bass_multi",
+            "vol": 44
+          }
+        },
+        "bass_8th_c": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "note": "C2",
+            "inst": "bass_multi",
+            "vol": 44
+          }
+        },
+        "bass_8th_g": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 2,
+            "count": 16
+          },
+          "cell": {
+            "channel": "bass",
+            "note": "G1",
+            "inst": "bass_multi",
+            "vol": 44
+          }
+        },
+        "stab_am": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "A3",
+            "inst": "stab",
+            "vol": 36
+          }
+        },
+        "stab_f": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "F3",
+            "inst": "stab",
+            "vol": 36
+          }
+        },
+        "stab_c": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "C4",
+            "inst": "stab",
+            "vol": 36
+          }
+        },
+        "stab_g": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "G3",
+            "inst": "stab",
+            "vol": 36
+          }
+        },
+        "perc_texture": {
+          "op": "prob",
+          "p_permille": 450,
+          "seed_salt": "perc_texture",
+          "body": {
+            "op": "emit",
+            "at": {
+              "op": "range",
+              "start": 2,
+              "step": 4,
+              "count": 8
+            },
+            "cell": {
+              "channel": "perc",
+              "note": "C4",
+              "inst": "perc_soft",
+              "vol": 28
+            }
+          }
+        },
+        "sub_drone_a": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "sub",
+            "note": "A1",
+            "inst": "sub_deep",
+            "vol": 38
+          }
+        },
+        "fx_sweep": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "C3",
+            "inst": "pad_bright",
+            "vol": 24
+          }
+        },
+        "fx_riser": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              24
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "note": "E3",
+            "inst": "pad_bright",
+            "vol": 28
+          }
+        }
+      },
+      "patterns": {
+        "intro_chord_1": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              }
+            ]
+          }
+        },
+        "intro_chord_2": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              }
+            ]
+          }
+        },
+        "intro_chord_3": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              }
+            ]
+          }
+        },
+        "intro_chord_4": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "fx_sweep"
+              }
+            ]
+          }
+        },
+        "build_a_chord_1": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "arp_am7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_euclid_am"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "build_a_chord_2": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "arp_fmaj7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_euclid_f"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "build_a_chord_3": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "arp_cmaj7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_euclid_c"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "build_a_chord_4": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "arp_g7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_euclid_g"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "build_b_chord_1": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "arp_am7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_8th_am"
+              },
+              {
+                "op": "ref",
+                "name": "stab_am"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "build_b_chord_2": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "arp_fmaj7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_8th_f"
+              },
+              {
+                "op": "ref",
+                "name": "stab_f"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "build_b_chord_3": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "arp_cmaj7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_8th_c"
+              },
+              {
+                "op": "ref",
+                "name": "stab_c"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "build_b_chord_4": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "arp_g7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_8th_g"
+              },
+              {
+                "op": "ref",
+                "name": "stab_g"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              },
+              {
+                "op": "ref",
+                "name": "fx_riser"
+              }
+            ]
+          }
+        },
+        "main_chord_1": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "arp_am7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_8th_am"
+              },
+              {
+                "op": "ref",
+                "name": "lead_motif_am"
+              },
+              {
+                "op": "ref",
+                "name": "stab_am"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "main_chord_2": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "arp_fmaj7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_8th_f"
+              },
+              {
+                "op": "ref",
+                "name": "lead_motif_f"
+              },
+              {
+                "op": "ref",
+                "name": "stab_f"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "main_chord_3": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "arp_cmaj7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_8th_c"
+              },
+              {
+                "op": "ref",
+                "name": "lead_motif_c"
+              },
+              {
+                "op": "ref",
+                "name": "stab_c"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "main_chord_4": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "arp_g7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_8th_g"
+              },
+              {
+                "op": "ref",
+                "name": "lead_motif_g"
+              },
+              {
+                "op": "ref",
+                "name": "stab_g"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              },
+              {
+                "op": "ref",
+                "name": "perc_texture"
+              }
+            ]
+          }
+        },
+        "breakdown_chord_1": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_1_am"
+              },
+              {
+                "op": "ref",
+                "name": "arp_am7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_euclid_am"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              }
+            ]
+          }
+        },
+        "breakdown_chord_2": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_2_f"
+              },
+              {
+                "op": "ref",
+                "name": "arp_fmaj7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_euclid_f"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              }
+            ]
+          }
+        },
+        "breakdown_chord_3": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_3_c"
+              },
+              {
+                "op": "ref",
+                "name": "arp_cmaj7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_euclid_c"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              }
+            ]
+          }
+        },
+        "breakdown_chord_4": {
+          "bars": 2,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "pad_low_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "pad_high_chord_4_g"
+              },
+              {
+                "op": "ref",
+                "name": "arp_g7"
+              },
+              {
+                "op": "ref",
+                "name": "bass_euclid_g"
+              },
+              {
+                "op": "ref",
+                "name": "sub_drone_a"
+              }
+            ]
+          }
+        }
+      },
+      "arrangement": [
+        {
+          "pattern": "intro_chord_1",
+          "repeat": 1
+        },
+        {
+          "pattern": "intro_chord_2",
+          "repeat": 1
+        },
+        {
+          "pattern": "intro_chord_3",
+          "repeat": 1
+        },
+        {
+          "pattern": "intro_chord_4",
+          "repeat": 1
+        },
+        {
+          "pattern": "intro_chord_1",
+          "repeat": 1
+        },
+        {
+          "pattern": "intro_chord_2",
+          "repeat": 1
+        },
+        {
+          "pattern": "intro_chord_3",
+          "repeat": 1
+        },
+        {
+          "pattern": "intro_chord_4",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_a_chord_1",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_a_chord_2",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_a_chord_3",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_a_chord_4",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_b_chord_1",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_b_chord_2",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_b_chord_3",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_b_chord_4",
+          "repeat": 1
+        },
+        {
+          "pattern": "main_chord_1",
+          "repeat": 1
+        },
+        {
+          "pattern": "main_chord_2",
+          "repeat": 1
+        },
+        {
+          "pattern": "main_chord_3",
+          "repeat": 1
+        },
+        {
+          "pattern": "main_chord_4",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_chord_1",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_chord_2",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_chord_3",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_chord_4",
+          "repeat": 1
+        }
+      ]
+    }
+  }
+}

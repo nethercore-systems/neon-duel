@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "01ce73130b80abf7070c9ef7350d916e66de25ab81f0a7b4de56925abc0aa8e1",
+  "asset_id": "sfx_death",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42003,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "0490d5ac623893760831975f048555368104148daa88e74eaf2263efc8e3e874",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/sfx_death.wav",
+      "hash": "f070c3294a37ccca3b6008989b518c6ce884d8b8d2afd383ef1239bb9b318a6f"
+    }
+  ],
+  "duration_ms": 2,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

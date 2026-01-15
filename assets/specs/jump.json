@@ -1,0 +1,73 @@
+{
+  "spec_version": 1,
+  "asset_id": "sfx_jump",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42005,
+  "description": "Player jump sound - Professional multi-layer jump with upward pitch sweep, airy transient, and body",
+  "outputs": [
+    { "kind": "primary", "format": "wav", "path": "assets/generated/sfx_jump.wav" }
+  ],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 0.18,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 280.0,
+            "modulator_freq": 840.0,
+            "modulation_index": 4.5
+          },
+          "envelope": { "attack": 0.001, "decay": 0.12, "sustain": 0.0, "release": 0.06 },
+          "volume": 0.6,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 520.0
+          },
+          "envelope": { "attack": 0.002, "decay": 0.15, "sustain": 0.0, "release": 0.03 },
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": { "type": "bandpass", "center": 8000.0, "resonance": 0.7 }
+          },
+          "envelope": { "attack": 0.0, "decay": 0.035, "sustain": 0.0, "release": 0.015 },
+          "volume": 0.4,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 140.0,
+            "modulator_freq": 280.0,
+            "modulation_index": 2.0
+          },
+          "envelope": { "attack": 0.005, "decay": 0.08, "sustain": 0.0, "release": 0.02 },
+          "volume": 0.35,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "pink",
+            "filter": { "type": "highpass", "cutoff": 3000.0, "resonance": 0.3 }
+          },
+          "envelope": { "attack": 0.001, "decay": 0.06, "sustain": 0.0, "release": 0.04 },
+          "volume": 0.25,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

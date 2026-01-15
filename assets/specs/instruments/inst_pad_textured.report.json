@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "79db49bbd8b517000da588e74af3bc805e5df9810c55076efaecc1ff9b481c34",
+  "asset_id": "inst_pad_textured",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60033,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "4d4951b0ccd93a659277e06d15a7357981c2d2d8f48748badcfa73547e72173f",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_pad_textured.wav",
+      "hash": "96b47b5e1989c71f886e960780d470a084639defbe32a9ba59fd829c015e5b2e"
+    }
+  ],
+  "duration_ms": 11,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

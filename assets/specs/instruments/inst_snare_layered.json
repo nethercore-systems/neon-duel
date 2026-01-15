@@ -1,0 +1,55 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_snare_layered",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60002,
+  "description": "Professional layered snare with body, crack, and transient",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_snare_layered.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "D3",
+      "duration_seconds": 0.3,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sine", "frequency": 200.0},
+          "envelope": {"attack": 0.001, "decay": 0.12, "sustain": 0.0, "release": 0.08},
+          "volume": 0.6,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "triangle", "frequency": 180.0},
+          "envelope": {"attack": 0.001, "decay": 0.1, "sustain": 0.0, "release": 0.06},
+          "volume": 0.35,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "triangle", "frequency": 181.04},
+          "envelope": {"attack": 0.002, "decay": 0.1, "sustain": 0.0, "release": 0.06},
+          "volume": 0.25,
+          "pan": -0.15
+        },
+        {
+          "synthesis": {"type": "noise_burst", "noise_type": "white", "filter": {"type": "bandpass", "center": 3000.0, "resonance": 0.4}},
+          "envelope": {"attack": 0.001, "decay": 0.15, "sustain": 0.0, "release": 0.1},
+          "volume": 0.55,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "noise_burst", "noise_type": "white", "filter": {"type": "highpass", "cutoff": 5000.0, "resonance": 0.3}},
+          "envelope": {"attack": 0.001, "decay": 0.08, "sustain": 0.0, "release": 0.05},
+          "volume": 0.4,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "fm_synth", "carrier_freq": 220.0, "modulator_freq": 180.0, "modulation_index": 2.5},
+          "envelope": {"attack": 0.001, "decay": 0.06, "sustain": 0.0, "release": 0.04},
+          "volume": 0.3,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

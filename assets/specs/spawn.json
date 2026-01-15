@@ -1,0 +1,84 @@
+{
+  "spec_version": 1,
+  "asset_id": "sfx_spawn",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42010,
+  "description": "Player spawn/respawn - Professional digital materialization with ascending FM sweep, metallic shimmer, harmonics, and presence",
+  "outputs": [
+    { "kind": "primary", "format": "wav", "path": "assets/generated/sfx_spawn.wav" }
+  ],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "C4",
+      "duration_seconds": 0.35,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 440.0,
+            "modulator_freq": 1320.0,
+            "modulation_index": 5.5
+          },
+          "envelope": { "attack": 0.005, "decay": 0.25, "sustain": 0.0, "release": 0.09 },
+          "volume": 0.7,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 880.0
+          },
+          "envelope": { "attack": 0.008, "decay": 0.24, "sustain": 0.0, "release": 0.1 },
+          "volume": 0.6,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "metallic",
+            "base_freq": 1760.0,
+            "num_partials": 8,
+            "inharmonicity": 1.6
+          },
+          "envelope": { "attack": 0.003, "decay": 0.28, "sustain": 0.0, "release": 0.07 },
+          "volume": 0.5,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "fm_synth",
+            "carrier_freq": 220.0,
+            "modulator_freq": 660.0,
+            "modulation_index": 4.0
+          },
+          "envelope": { "attack": 0.01, "decay": 0.22, "sustain": 0.0, "release": 0.08 },
+          "volume": 0.45,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "noise_burst",
+            "noise_type": "white",
+            "filter": { "type": "bandpass", "center": 8000.0, "resonance": 1.0 }
+          },
+          "envelope": { "attack": 0.003, "decay": 0.12, "sustain": 0.0, "release": 0.05 },
+          "volume": 0.35,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {
+            "type": "oscillator",
+            "waveform": "sine",
+            "frequency": 1320.0
+          },
+          "envelope": { "attack": 0.006, "decay": 0.26, "sustain": 0.0, "release": 0.08 },
+          "volume": 0.4,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

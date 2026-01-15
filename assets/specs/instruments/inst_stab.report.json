@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "901789234e980b53d7ff6da89e1fe9dd4d9a949e8cf61957de4031c45fb13e21",
+  "asset_id": "inst_stab",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60040,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "1897c339c681cab4f43b58b3725efa2ee47e618aae9699ac92730ff018fb00fd",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_stab.wav",
+      "hash": "8c329d964de9c2907c6c01fb9be89d1e9f287dab1ff1054dd0c9e84b627cb971"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

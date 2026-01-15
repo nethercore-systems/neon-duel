@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "b078f106b5c26e5d2f9eab1d667d3bd75d411377a2b18215ec24402d511bbae3",
+  "asset_id": "inst_hat_metallic",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60003,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "2e31a8b0a19b1a4ae9e1b0cb49f6a24d11c9bbf2048a8d0a8664c350bff6cf57",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_hat_metallic.wav",
+      "hash": "384def752d8606f6cb33b51f14a5f4efbf2a8b5332e69e6c4e8e42f58c3e1a6e"
+    }
+  ],
+  "duration_ms": 3,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "59cabf3f371e5d228465bd6dc2f0f971185f29fdb1d3b667c71743a0cfda1982",
+  "asset_id": "inst_pad_warm",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60030,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "216477a4f07eabc4d96f7f50bf7e2e7a7a45873ddb9f569eb802fff2065d643a",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_pad_warm.wav",
+      "hash": "4d39108ad2076a158b2005b221f0616fdd214b069aff2c5c8f295e63291fe00c"
+    }
+  ],
+  "duration_ms": 7,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

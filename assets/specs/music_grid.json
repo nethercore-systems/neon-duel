@@ -1,0 +1,1899 @@
+{
+  "spec_version": 1,
+  "asset_id": "music_grid",
+  "asset_type": "music",
+  "license": "CC0-1.0",
+  "seed": 50001,
+  "description": "Grid Arena - Professional C Dorian synthwave combat track with syncopated groove",
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "xm",
+      "path": "assets/generated/music_grid.xm"
+    }
+  ],
+  "recipe": {
+    "kind": "music.tracker_song_compose_v1",
+    "params": {
+      "format": "xm",
+      "bpm": 128,
+      "speed": 6,
+      "channels": 8,
+      "loop": true,
+      "name": "GRID ARENA",
+      "channel_ids": {
+        "kick": 0,
+        "snare": 1,
+        "hat": 2,
+        "bass": 3,
+        "arp": 4,
+        "lead": 5,
+        "stab": 6,
+        "pad": 7
+      },
+      "instrument_ids": {
+        "kick_fm": 0,
+        "snare_layered": 1,
+        "hat_metallic": 2,
+        "bass_multi": 3,
+        "arp_grid": 4,
+        "lead_saw": 5,
+        "stab": 6,
+        "pad_warm": 7,
+        "crash": 8,
+        "fx_riser": 9
+      },
+      "timebase": {
+        "beats_per_bar": 4,
+        "rows_per_beat": 4
+      },
+      "instruments": [
+        {
+          "name": "kick_fm",
+          "ref": "instruments/inst_kick_fm.json"
+        },
+        {
+          "name": "snare_layered",
+          "ref": "instruments/inst_snare_layered.json"
+        },
+        {
+          "name": "hat_metallic",
+          "ref": "instruments/inst_hat_metallic.json"
+        },
+        {
+          "name": "bass_multi",
+          "ref": "instruments/inst_bass_multi.json"
+        },
+        {
+          "name": "arp_grid",
+          "ref": "instruments/inst_arp_grid.json"
+        },
+        {
+          "name": "lead_saw",
+          "ref": "instruments/inst_lead_saw.json"
+        },
+        {
+          "name": "stab",
+          "ref": "instruments/inst_stab.json"
+        },
+        {
+          "name": "pad_warm",
+          "ref": "instruments/inst_pad_warm.json"
+        },
+        {
+          "name": "crash",
+          "ref": "instruments/inst_crash.json"
+        },
+        {
+          "name": "fx_riser",
+          "ref": "instruments/inst_fx_riser.json"
+        }
+      ],
+      "defs": {
+        "kick_four_on_floor": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 16,
+            "count": 4
+          },
+          "cell": {
+            "channel": "kick",
+            "note": "C2",
+            "inst": "kick_fm",
+            "vol": 64
+          }
+        },
+        "kick_ghost_bar3": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              38
+            ]
+          },
+          "cell": {
+            "channel": "kick",
+            "note": "C2",
+            "inst": "kick_fm",
+            "vol": 48
+          }
+        },
+        "kick_double_fill": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              56,
+              60
+            ]
+          },
+          "cell": {
+            "channel": "kick",
+            "note": "C2",
+            "inst": "kick_fm",
+            "vol": 60
+          }
+        },
+        "snare_backbeat": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 16,
+            "step": 32,
+            "count": 2
+          },
+          "cell": {
+            "channel": "snare",
+            "note": "D3",
+            "inst": "snare_layered",
+            "vol": 58
+          }
+        },
+        "snare_ghost": {
+          "op": "prob",
+          "p_permille": 400,
+          "seed_salt": "snare_ghost",
+          "body": {
+            "op": "emit",
+            "at": {
+              "op": "range",
+              "start": 10,
+              "step": 8,
+              "count": 7
+            },
+            "cell": {
+              "channel": "snare",
+              "note": "D3",
+              "inst": "snare_layered",
+              "vol": 28
+            }
+          }
+        },
+        "snare_fill_bar8": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              56,
+              58,
+              60,
+              62
+            ]
+          },
+          "cell": {
+            "channel": "snare",
+            "note": "D3",
+            "inst": "snare_layered",
+            "vol": 54
+          }
+        },
+        "hat_closed_offbeat": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 8,
+            "step": 16,
+            "count": 4
+          },
+          "cell": {
+            "channel": "hat",
+            "note": "C5",
+            "inst": "hat_metallic",
+            "vol": 36
+          }
+        },
+        "hat_closed_straight": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 8,
+            "count": 8
+          },
+          "cell": {
+            "channel": "hat",
+            "note": "C5",
+            "inst": "hat_metallic",
+            "vol": 36
+          }
+        },
+        "hat_open_euclid": {
+          "op": "emit",
+          "at": {
+            "op": "euclid",
+            "pulses": 5,
+            "steps": 16,
+            "stride": 4
+          },
+          "cell": {
+            "channel": "hat",
+            "note": "C5",
+            "inst": "hat_metallic",
+            "vol": 42
+          }
+        },
+        "hat_ghost": {
+          "op": "prob",
+          "p_permille": 250,
+          "seed_salt": "hat_ghost",
+          "body": {
+            "op": "emit",
+            "at": {
+              "op": "range",
+              "start": 2,
+              "step": 4,
+              "count": 16
+            },
+            "cell": {
+              "channel": "hat",
+              "note": "C5",
+              "inst": "hat_metallic",
+              "vol": 20
+            }
+          }
+        },
+        "crash_accent": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "hat",
+            "note": "C5",
+            "inst": "crash",
+            "vol": 52
+          }
+        },
+        "bass_cm_groove": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              8,
+              12,
+              20,
+              24
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 54
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C2",
+              "Eb2",
+              "C2",
+              "G2",
+              "C2"
+            ]
+          }
+        },
+        "bass_cm_high": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              28
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 52
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Eb2"
+            ]
+          }
+        },
+        "bass_cm_climax": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              30
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C3"
+            ]
+          }
+        },
+        "bass_bb_groove": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              8,
+              12,
+              20,
+              24
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 54
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Bb1",
+              "D2",
+              "Bb1",
+              "F2",
+              "Bb1"
+            ]
+          }
+        },
+        "bass_bb_high": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              28
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 52
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "D2"
+            ]
+          }
+        },
+        "bass_bb_climax": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              30
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Bb2"
+            ]
+          }
+        },
+        "bass_ab_groove": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              8,
+              12,
+              20,
+              24
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 54
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Ab1",
+              "C2",
+              "Ab1",
+              "Eb2",
+              "Ab1"
+            ]
+          }
+        },
+        "bass_ab_high": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              28
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 52
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C2"
+            ]
+          }
+        },
+        "bass_ab_climax": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              30
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Ab2"
+            ]
+          }
+        },
+        "bass_bbg_transition": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              8,
+              12,
+              20,
+              24,
+              28,
+              30
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 54
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Bb1",
+              "D2",
+              "Bb1",
+              "F2",
+              "G1",
+              "D2",
+              "G2"
+            ]
+          }
+        },
+        "bass_bbg_end": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              30
+            ]
+          },
+          "cell": {
+            "channel": "bass",
+            "inst": "bass_multi",
+            "vol": 56
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "B2"
+            ]
+          }
+        },
+        "bass_half_volume_cm": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "emit_seq",
+              "at": {
+                "op": "list",
+                "rows": [
+                  0,
+                  8,
+                  12,
+                  20,
+                  24,
+                  28,
+                  30
+                ]
+              },
+              "cell": {
+                "channel": "bass",
+                "inst": "bass_multi",
+                "vol": 32
+              },
+              "note_seq": {
+                "mode": "cycle",
+                "values": [
+                  "C2",
+                  "Eb2",
+                  "C2",
+                  "G2",
+                  "C2",
+                  "Eb2",
+                  "C3"
+                ]
+              }
+            }
+          ]
+        },
+        "arp_cm": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 4,
+            "count": 16
+          },
+          "cell": {
+            "channel": "arp",
+            "inst": "arp_grid",
+            "vol": 42
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C4",
+              "Eb4",
+              "G4",
+              "C5",
+              "G4",
+              "Eb4",
+              "G4",
+              "C4",
+              "Eb4",
+              "G4",
+              "C5",
+              "G4",
+              "Eb4",
+              "D4",
+              "C4",
+              "Bb3"
+            ]
+          }
+        },
+        "arp_bb": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 4,
+            "count": 16
+          },
+          "cell": {
+            "channel": "arp",
+            "inst": "arp_grid",
+            "vol": 42
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Bb3",
+              "D4",
+              "F4",
+              "Bb4",
+              "F4",
+              "D4",
+              "F4",
+              "Bb3",
+              "D4",
+              "F4",
+              "Bb4",
+              "F4",
+              "D4",
+              "C4",
+              "Bb3",
+              "G3"
+            ]
+          }
+        },
+        "arp_ab": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 4,
+            "count": 16
+          },
+          "cell": {
+            "channel": "arp",
+            "inst": "arp_grid",
+            "vol": 42
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Ab3",
+              "C4",
+              "Eb4",
+              "Ab4",
+              "Eb4",
+              "C4",
+              "Eb4",
+              "Ab3",
+              "C4",
+              "Eb4",
+              "Ab4",
+              "Eb4",
+              "C4",
+              "Bb3",
+              "Ab3",
+              "F3"
+            ]
+          }
+        },
+        "arp_g": {
+          "op": "emit_seq",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 4,
+            "count": 16
+          },
+          "cell": {
+            "channel": "arp",
+            "inst": "arp_grid",
+            "vol": 42
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "G3",
+              "B3",
+              "D4",
+              "G4",
+              "D4",
+              "B3",
+              "D4",
+              "G3",
+              "B3",
+              "D4",
+              "G4",
+              "D4",
+              "F4",
+              "D4",
+              "B3",
+              "G3"
+            ]
+          }
+        },
+        "stab_cm_hook": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              54,
+              56,
+              58
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "inst": "stab",
+            "vol": 50
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C5",
+              "F5",
+              "Eb5",
+              "D5"
+            ]
+          }
+        },
+        "stab_bb_hook": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              12,
+              14,
+              62
+            ]
+          },
+          "cell": {
+            "channel": "stab",
+            "inst": "stab",
+            "vol": 50
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Bb4",
+              "Eb5",
+              "F5",
+              "G5"
+            ]
+          }
+        },
+        "lead_melody_bar1_cm": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              4,
+              8
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C5",
+              "D5",
+              "Eb5"
+            ]
+          }
+        },
+        "lead_melody_bar2_cm": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              8,
+              12
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "G5",
+              "F5",
+              "Eb5"
+            ]
+          }
+        },
+        "lead_melody_bar3_bb": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "D5"
+            ]
+          }
+        },
+        "lead_melody_bar4_bb": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              4,
+              8,
+              10,
+              12
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "F5",
+              "G5",
+              "F5",
+              "Eb5",
+              "D5"
+            ]
+          }
+        },
+        "lead_melody_bar5_ab": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              8
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C5",
+              "Eb5"
+            ]
+          }
+        },
+        "lead_melody_bar6_ab": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              4,
+              6,
+              8
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "Ab5",
+              "G5",
+              "F5",
+              "Eb5"
+            ]
+          }
+        },
+        "lead_melody_bar7_bb": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              4,
+              8
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "D5",
+              "F5",
+              "Bb5"
+            ]
+          }
+        },
+        "lead_melody_bar8_g": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              4,
+              8
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 48
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "B4",
+              "D5",
+              "G5"
+            ]
+          }
+        },
+        "lead_intimate_cm": {
+          "op": "emit_seq",
+          "at": {
+            "op": "list",
+            "rows": [
+              0,
+              4,
+              8,
+              16,
+              20,
+              24
+            ]
+          },
+          "cell": {
+            "channel": "lead",
+            "inst": "lead_saw",
+            "vol": 38
+          },
+          "note_seq": {
+            "mode": "cycle",
+            "values": [
+              "C5",
+              "D5",
+              "Eb5",
+              "G5",
+              "F5",
+              "Eb5"
+            ]
+          }
+        },
+        "pad_cm": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad",
+            "note": "C3",
+            "inst": "pad_warm",
+            "vol": 36
+          }
+        },
+        "pad_bb": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad",
+            "note": "Bb2",
+            "inst": "pad_warm",
+            "vol": 36
+          }
+        },
+        "pad_ab": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad",
+            "note": "Ab2",
+            "inst": "pad_warm",
+            "vol": 36
+          }
+        },
+        "pad_g": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad",
+            "note": "G2",
+            "inst": "pad_warm",
+            "vol": 36
+          }
+        },
+        "fx_riser_build": {
+          "op": "emit",
+          "at": {
+            "op": "list",
+            "rows": [
+              0
+            ]
+          },
+          "cell": {
+            "channel": "pad",
+            "note": "C3",
+            "inst": "fx_riser",
+            "vol": 44
+          }
+        },
+        "drums_verse": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "ref",
+              "name": "kick_four_on_floor"
+            },
+            {
+              "op": "ref",
+              "name": "snare_backbeat"
+            },
+            {
+              "op": "ref",
+              "name": "hat_closed_offbeat"
+            },
+            {
+              "op": "ref",
+              "name": "hat_open_euclid"
+            },
+            {
+              "op": "ref",
+              "name": "hat_ghost"
+            }
+          ]
+        },
+        "drums_verse_bar3": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "ref",
+              "name": "kick_four_on_floor"
+            },
+            {
+              "op": "ref",
+              "name": "kick_ghost_bar3"
+            },
+            {
+              "op": "ref",
+              "name": "snare_backbeat"
+            },
+            {
+              "op": "ref",
+              "name": "hat_closed_offbeat"
+            },
+            {
+              "op": "ref",
+              "name": "hat_open_euclid"
+            },
+            {
+              "op": "ref",
+              "name": "hat_ghost"
+            }
+          ]
+        },
+        "drums_chorus": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "ref",
+              "name": "kick_four_on_floor"
+            },
+            {
+              "op": "ref",
+              "name": "snare_backbeat"
+            },
+            {
+              "op": "ref",
+              "name": "snare_ghost"
+            },
+            {
+              "op": "ref",
+              "name": "hat_closed_straight"
+            },
+            {
+              "op": "ref",
+              "name": "hat_open_euclid"
+            }
+          ]
+        },
+        "drums_chorus_bar8": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "ref",
+              "name": "kick_four_on_floor"
+            },
+            {
+              "op": "ref",
+              "name": "kick_double_fill"
+            },
+            {
+              "op": "ref",
+              "name": "snare_backbeat"
+            },
+            {
+              "op": "ref",
+              "name": "snare_fill_bar8"
+            },
+            {
+              "op": "ref",
+              "name": "hat_closed_straight"
+            },
+            {
+              "op": "ref",
+              "name": "hat_open_euclid"
+            }
+          ]
+        },
+        "drums_breakdown": {
+          "op": "emit",
+          "at": {
+            "op": "range",
+            "start": 0,
+            "step": 16,
+            "count": 4
+          },
+          "cell": {
+            "channel": "kick",
+            "note": "C2",
+            "inst": "kick_fm",
+            "vol": 64
+          }
+        },
+        "drums_build": {
+          "op": "stack",
+          "merge": "last_wins",
+          "parts": [
+            {
+              "op": "ref",
+              "name": "kick_four_on_floor"
+            },
+            {
+              "op": "ref",
+              "name": "kick_double_fill"
+            },
+            {
+              "op": "ref",
+              "name": "snare_fill_bar8"
+            }
+          ]
+        }
+      },
+      "patterns": {
+        "verse_cm_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_verse"
+              },
+              {
+                "op": "ref",
+                "name": "bass_cm_groove"
+              },
+              {
+                "op": "ref",
+                "name": "arp_cm"
+              },
+              {
+                "op": "ref",
+                "name": "stab_cm_hook"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cm"
+              }
+            ]
+          }
+        },
+        "verse_cm_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_verse"
+              },
+              {
+                "op": "ref",
+                "name": "bass_cm_groove"
+              },
+              {
+                "op": "ref",
+                "name": "bass_cm_high"
+              },
+              {
+                "op": "ref",
+                "name": "bass_cm_climax"
+              },
+              {
+                "op": "ref",
+                "name": "arp_cm"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cm"
+              }
+            ]
+          }
+        },
+        "verse_bb_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_verse_bar3"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_groove"
+              },
+              {
+                "op": "ref",
+                "name": "arp_bb"
+              },
+              {
+                "op": "ref",
+                "name": "stab_bb_hook"
+              },
+              {
+                "op": "ref",
+                "name": "pad_bb"
+              }
+            ]
+          }
+        },
+        "verse_bb_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_verse"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_groove"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_high"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_climax"
+              },
+              {
+                "op": "ref",
+                "name": "arp_bb"
+              },
+              {
+                "op": "ref",
+                "name": "pad_bb"
+              }
+            ]
+          }
+        },
+        "verse_ab_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_verse"
+              },
+              {
+                "op": "ref",
+                "name": "bass_ab_groove"
+              },
+              {
+                "op": "ref",
+                "name": "arp_ab"
+              },
+              {
+                "op": "ref",
+                "name": "pad_ab"
+              }
+            ]
+          }
+        },
+        "verse_ab_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_verse"
+              },
+              {
+                "op": "ref",
+                "name": "bass_ab_groove"
+              },
+              {
+                "op": "ref",
+                "name": "bass_ab_high"
+              },
+              {
+                "op": "ref",
+                "name": "bass_ab_climax"
+              },
+              {
+                "op": "ref",
+                "name": "arp_ab"
+              },
+              {
+                "op": "ref",
+                "name": "pad_ab"
+              }
+            ]
+          }
+        },
+        "verse_bbg_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_verse"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bbg_transition"
+              },
+              {
+                "op": "ref",
+                "name": "arp_bb"
+              },
+              {
+                "op": "ref",
+                "name": "pad_bb"
+              }
+            ]
+          }
+        },
+        "verse_bbg_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_verse"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bbg_transition"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bbg_end"
+              },
+              {
+                "op": "ref",
+                "name": "arp_g"
+              },
+              {
+                "op": "ref",
+                "name": "pad_g"
+              }
+            ]
+          }
+        },
+        "chorus_cm_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "crash_accent"
+              },
+              {
+                "op": "ref",
+                "name": "drums_chorus"
+              },
+              {
+                "op": "ref",
+                "name": "bass_cm_groove"
+              },
+              {
+                "op": "ref",
+                "name": "arp_cm"
+              },
+              {
+                "op": "ref",
+                "name": "lead_melody_bar1_cm"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cm"
+              }
+            ]
+          }
+        },
+        "chorus_cm_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_chorus"
+              },
+              {
+                "op": "ref",
+                "name": "bass_cm_groove"
+              },
+              {
+                "op": "ref",
+                "name": "bass_cm_high"
+              },
+              {
+                "op": "ref",
+                "name": "bass_cm_climax"
+              },
+              {
+                "op": "ref",
+                "name": "arp_cm"
+              },
+              {
+                "op": "ref",
+                "name": "lead_melody_bar2_cm"
+              },
+              {
+                "op": "ref",
+                "name": "pad_cm"
+              }
+            ]
+          }
+        },
+        "chorus_bb_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_chorus"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_groove"
+              },
+              {
+                "op": "ref",
+                "name": "arp_bb"
+              },
+              {
+                "op": "ref",
+                "name": "lead_melody_bar3_bb"
+              },
+              {
+                "op": "ref",
+                "name": "pad_bb"
+              }
+            ]
+          }
+        },
+        "chorus_bb_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_chorus"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_groove"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_high"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_climax"
+              },
+              {
+                "op": "ref",
+                "name": "arp_bb"
+              },
+              {
+                "op": "ref",
+                "name": "lead_melody_bar4_bb"
+              },
+              {
+                "op": "ref",
+                "name": "pad_bb"
+              }
+            ]
+          }
+        },
+        "chorus_ab_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_chorus"
+              },
+              {
+                "op": "ref",
+                "name": "bass_ab_groove"
+              },
+              {
+                "op": "ref",
+                "name": "arp_ab"
+              },
+              {
+                "op": "ref",
+                "name": "lead_melody_bar5_ab"
+              },
+              {
+                "op": "ref",
+                "name": "pad_ab"
+              }
+            ]
+          }
+        },
+        "chorus_ab_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_chorus"
+              },
+              {
+                "op": "ref",
+                "name": "bass_ab_groove"
+              },
+              {
+                "op": "ref",
+                "name": "bass_ab_high"
+              },
+              {
+                "op": "ref",
+                "name": "bass_ab_climax"
+              },
+              {
+                "op": "ref",
+                "name": "arp_ab"
+              },
+              {
+                "op": "ref",
+                "name": "lead_melody_bar6_ab"
+              },
+              {
+                "op": "ref",
+                "name": "pad_ab"
+              }
+            ]
+          }
+        },
+        "chorus_bbg_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_chorus"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bbg_transition"
+              },
+              {
+                "op": "ref",
+                "name": "arp_bb"
+              },
+              {
+                "op": "ref",
+                "name": "lead_melody_bar7_bb"
+              },
+              {
+                "op": "ref",
+                "name": "pad_bb"
+              }
+            ]
+          }
+        },
+        "chorus_bbg_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_chorus_bar8"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bbg_transition"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bbg_end"
+              },
+              {
+                "op": "ref",
+                "name": "arp_g"
+              },
+              {
+                "op": "ref",
+                "name": "lead_melody_bar8_g"
+              },
+              {
+                "op": "ref",
+                "name": "pad_g"
+              }
+            ]
+          }
+        },
+        "breakdown_cm_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_breakdown"
+              },
+              {
+                "op": "ref",
+                "name": "bass_half_volume_cm"
+              },
+              {
+                "op": "ref",
+                "name": "lead_intimate_cm"
+              }
+            ]
+          }
+        },
+        "breakdown_cm_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_breakdown"
+              },
+              {
+                "op": "ref",
+                "name": "bass_half_volume_cm"
+              },
+              {
+                "op": "ref",
+                "name": "lead_intimate_cm"
+              }
+            ]
+          }
+        },
+        "build_bb_bar1": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_build"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_groove"
+              },
+              {
+                "op": "ref",
+                "name": "arp_bb"
+              }
+            ]
+          }
+        },
+        "build_bb_bar2": {
+          "rows": 64,
+          "program": {
+            "op": "stack",
+            "merge": "last_wins",
+            "parts": [
+              {
+                "op": "ref",
+                "name": "drums_build"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_groove"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_high"
+              },
+              {
+                "op": "ref",
+                "name": "bass_bb_climax"
+              },
+              {
+                "op": "ref",
+                "name": "arp_bb"
+              },
+              {
+                "op": "ref",
+                "name": "fx_riser_build"
+              }
+            ]
+          }
+        }
+      },
+      "arrangement": [
+        {
+          "pattern": "verse_cm_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "verse_cm_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "verse_bb_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "verse_bb_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "verse_ab_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "verse_ab_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "verse_bbg_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "verse_bbg_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "chorus_cm_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "chorus_cm_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "chorus_bb_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "chorus_bb_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "chorus_ab_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "chorus_ab_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "chorus_bbg_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "chorus_bbg_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_cm_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_cm_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_cm_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "breakdown_cm_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_bb_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_bb_bar2",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_bb_bar1",
+          "repeat": 1
+        },
+        {
+          "pattern": "build_bb_bar2",
+          "repeat": 1
+        }
+      ]
+    }
+  }
+}

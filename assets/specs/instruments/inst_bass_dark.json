@@ -1,0 +1,49 @@
+{
+  "spec_version": 1,
+  "asset_id": "inst_bass_dark",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60013,
+  "description": "Dark atmospheric bass with evolving filter movement",
+  "outputs": [{"kind": "primary", "format": "wav", "path": "assets/generated/instruments/inst_bass_dark.wav"}],
+  "recipe": {
+    "kind": "audio_v1",
+    "params": {
+      "base_note": "A1",
+      "duration_seconds": 1.2,
+      "sample_rate": 44100,
+      "layers": [
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sine", "frequency": 55.0},
+          "envelope": {"attack": 0.05, "decay": 0.25, "sustain": 0.7, "release": 0.25},
+          "volume": 0.65,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 55.0},
+          "envelope": {"attack": 0.08, "decay": 0.35, "sustain": 0.5, "release": 0.3},
+          "volume": 0.3,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "sawtooth", "frequency": 55.48},
+          "envelope": {"attack": 0.09, "decay": 0.35, "sustain": 0.5, "release": 0.3},
+          "volume": 0.2,
+          "pan": -0.25
+        },
+        {
+          "synthesis": {"type": "fm_synth", "carrier_freq": 55.0, "modulator_freq": 27.5, "modulation_index": 2.8},
+          "envelope": {"attack": 0.06, "decay": 0.3, "sustain": 0.55, "release": 0.28},
+          "volume": 0.25,
+          "pan": 0.0
+        },
+        {
+          "synthesis": {"type": "oscillator", "waveform": "triangle", "frequency": 110.0},
+          "envelope": {"attack": 0.1, "decay": 0.2, "sustain": 0.4, "release": 0.2},
+          "volume": 0.15,
+          "pan": 0.0
+        }
+      ]
+    }
+  }
+}

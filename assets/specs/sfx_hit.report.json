@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "815781dad9fbb9d5489b8e8e611cff159816345756e64f558b50501312cbb70d",
+  "asset_id": "sfx_hit",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42002,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "b70f7b0d6592affb211f37702d09df33283be28f6d777a3f69fc42cf0ee7dbab",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/sfx_hit.wav",
+      "hash": "a77292a1bf914abbda6c6b4471f4c096fc470fe65b15d0bb81f5922c175c74bf"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

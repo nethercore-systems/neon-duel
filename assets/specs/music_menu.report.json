@@ -1,0 +1,32 @@
+{
+  "report_version": 1,
+  "spec_hash": "fe3814e453aec7b82b0a8fbbe647aab47df12385494fa332e01582ceae47427d",
+  "asset_id": "music_menu",
+  "asset_type": "music",
+  "license": "CC0-1.0",
+  "seed": 50000,
+  "recipe_kind": "music.tracker_song_compose_v1",
+  "recipe_hash": "36d1ab4910105d585ca2d85c43b52183e11fc073a6d82114dcb833b00f9f53c0",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "xm",
+      "path": "assets/generated/music_menu.xm",
+      "hash": "33597d618913c160649f426a95918c102b87894da3f4bed5f35b046c88abf0e8"
+    },
+    {
+      "kind": "metadata",
+      "format": "json",
+      "path": "assets/generated/music_menu.xm.loops.json",
+      "hash": "a9b8ced9434cec3ab15c5212c90efd5d2fc3d0362690031eb388f90dca9c5549"
+    }
+  ],
+  "duration_ms": 1277,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

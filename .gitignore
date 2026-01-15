@@ -16,3 +16,6 @@ Thumbs.db
 
 # Burl workflow state
 /.burl/
+
+*.nczx
+nul

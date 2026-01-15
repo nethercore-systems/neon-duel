@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "4a65544a8ed01ff0550c47da2c0f353483607f32fb37d780a8a64d145d80f5c8",
+  "asset_id": "inst_crash",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60004,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "000fff320a1cc040919e4840a2d0dda48318fa7d2fb3119abfa017b9791b7dc1",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_crash.wav",
+      "hash": "de3c7dad3eec2ae9ba3b5ab27134cb41a825409af82c558143daa2b434ff9c35"
+    }
+  ],
+  "duration_ms": 38,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

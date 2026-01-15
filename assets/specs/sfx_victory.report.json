@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "993131e4f850b8060f6a7122c3e4f948d47342a5bbccee8eb09aa19d159bc25b",
+  "asset_id": "sfx_victory",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 42100,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "bbdce557abbdb3718e320071403faf7930b975b6a323dc303eb97feccec87043",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/sfx_victory.wav",
+      "hash": "1fc4f365836aa8329938c2dcd6e51312d38bb4a9e911f5432d8b1fa9b3bedf06"
+    }
+  ],
+  "duration_ms": 25,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

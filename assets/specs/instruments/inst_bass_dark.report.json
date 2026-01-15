@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "65114c62fb72cf84e382c4fa670abc719adb8213cc8e8bbf49431d440d3e630e",
+  "asset_id": "inst_bass_dark",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60013,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "96fc166c6a2164d8883e90fda4e862068199169aa8107d378efdca8183171f80",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_bass_dark.wav",
+      "hash": "d77073a96d075d82e7de8b1a80bd8bd116f206cf3c9e761995130891d2aa7126"
+    }
+  ],
+  "duration_ms": 3,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

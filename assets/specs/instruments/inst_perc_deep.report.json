@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "71636a3b47af73c0e7a4ec63daf3abb16fb63d0ccba0ee9e872a8a1d7d8e9795",
+  "asset_id": "inst_perc_deep",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60052,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "6f8f0810402cb7ecd9308f95216cbafef3ab136b21e446f79a181d96206eb205",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_perc_deep.wav",
+      "hash": "b95ba1e7212cd6794ba31cd94b64a3159b5269161624e56d54210ec7d2ee7285"
+    }
+  ],
+  "duration_ms": 1,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}

@@ -1,0 +1,26 @@
+{
+  "report_version": 1,
+  "spec_hash": "cc8d9c2512a70097e2eaf51598bb252c7d94f045bca012f29f8377be3f5d5986",
+  "asset_id": "inst_fx_sweep",
+  "asset_type": "audio",
+  "license": "CC0-1.0",
+  "seed": 60042,
+  "recipe_kind": "audio_v1",
+  "recipe_hash": "3d78585fa6224528f03b5e940c665526654937c986d466a6d840dc5d85c73c89",
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "outputs": [
+    {
+      "kind": "primary",
+      "format": "wav",
+      "path": "assets/generated/instruments/inst_fx_sweep.wav",
+      "hash": "b3e145808acbab1964c4e84ed3d08ffbd87b4276f0a7c816b0d19e5e1f5aec23"
+    }
+  ],
+  "duration_ms": 3,
+  "backend_version": "speccade-cli v0.1.0",
+  "target_triple": "x86_64-pc-windows-msvc",
+  "git_commit": "5d45d787d5b3ca72ddea635eb661a2bcf1a84246",
+  "git_dirty": true
+}
