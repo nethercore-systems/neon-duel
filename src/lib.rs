@@ -23,6 +23,11 @@ use ffi::*;
 // =============================================================================
 
 // Button indices (from ZX spec)
+// 0=UP, 1=DOWN, 2=LEFT, 3=RIGHT, 4=A, 5=B, 6=X, 7=Y, 8=L1, 9=R1, 10=L3, 11=R3, 12=START, 13=SELECT
+const BUTTON_UP: u32 = 0;
+const BUTTON_DOWN: u32 = 1;
+const BUTTON_LEFT: u32 = 2;
+const BUTTON_RIGHT: u32 = 3;
 const BUTTON_A: u32 = 4;      // Jump
 const BUTTON_B: u32 = 5;      // Shoot
 const BUTTON_X: u32 = 6;      // Melee
@@ -205,6 +210,9 @@ static mut TICK: u32 = 0;
 // Stage data
 static mut HAS_PIT: bool = false;
 static mut PIT_Y: f32 = -10.0;
+
+// Mesh handles (created in init)
+static mut CUBE_MESH: u32 = 0;
 
 // =============================================================================
 // HELPER FUNCTIONS
@@ -456,6 +464,9 @@ pub extern "C" fn init() {
         // Dark background
         set_clear_color(0x0a0a1aFF);
 
+        // Create mesh handles
+        CUBE_MESH = cube(1.0, 1.0, 1.0);
+
         // Initialize game
         reset_match();
     }
@@ -515,11 +526,11 @@ fn update_player(idx: usize) {
         let stick_y = left_stick_y(idx as u32);
 
         // Also check d-pad for digital input
-        let dpad_h = if dpad_right(idx as u32) != 0 { 1.0 }
-                     else if dpad_left(idx as u32) != 0 { -1.0 }
+        let dpad_h = if button_held(idx as u32, BUTTON_RIGHT) != 0 { 1.0 }
+                     else if button_held(idx as u32, BUTTON_LEFT) != 0 { -1.0 }
                      else { 0.0 };
-        let dpad_v = if dpad_up(idx as u32) != 0 { 1.0 }
-                     else if dpad_down(idx as u32) != 0 { -1.0 }
+        let dpad_v = if button_held(idx as u32, BUTTON_UP) != 0 { 1.0 }
+                     else if button_held(idx as u32, BUTTON_DOWN) != 0 { -1.0 }
                      else { 0.0 };
 
         // Combine analog and digital
@@ -924,23 +935,31 @@ pub extern "C" fn update() {
 fn setup_epu_grid_arena() {
     unsafe {
         // Layer 0: Synthwave grid floor
+        // env_lines(layer, variant, line_type, thickness, spacing, fade_distance,
+        //           color_primary, color_accent, accent_every, phase)
         env_lines(
             0,                // layer
-            0x00FFFF40,       // color (cyan, semi-transparent)
-            0.0, -3.0, 0.0,   // origin
+            0,                // variant (0=Floor)
+            2,                // line_type (2=Grid)
+            20,               // thickness (0-255)
             0.5,              // spacing
-            8,                // line count
-            3.0,              // depth
-            0.002,            // line width
-            0.0,              // phase (animation)
+            30.0,             // fade_distance
+            0x00FFFFFF,       // color_primary (cyan)
+            0x00808080,       // color_accent (dim cyan)
+            4,                // accent_every (every 4th line)
+            (TICK % 65536) as u32, // phase (scroll animation)
         );
 
         // Layer 1: Gradient sky
+        // env_gradient(layer, zenith, sky_horizon, ground_horizon, nadir, rotation, shift)
         env_gradient(
             1,                // layer
-            0x1a0a2eFF,       // top color (dark purple)
-            0x0a0a1aFF,       // bottom color (near black)
-            0.0,              // blend position
+            0x0a001aFF,       // zenith (dark purple-black)
+            0x1a0a2eFF,       // sky_horizon (purple)
+            0x1a0a2eFF,       // ground_horizon (purple)
+            0x0a0a1aFF,       // nadir (near black)
+            0.0,              // rotation
+            0.0,              // shift
         );
     }
 }
@@ -948,23 +967,32 @@ fn setup_epu_grid_arena() {
 fn setup_epu_scatter_field() {
     unsafe {
         // Layer 0: Falling particles
+        // env_scatter(layer, variant, density, size, glow, streak_length,
+        //             color_primary, color_secondary, parallax_rate, parallax_size, phase)
         env_scatter(
             0,                // layer
-            0xFFFFFF30,       // color (white, transparent)
-            200,              // particle count
-            0.05,             // particle size
-            0.0, 5.0,         // y range min, max
-            -10.0, 10.0,      // x range min, max
-            0.02,             // fall speed
-            TICK as f32 * 0.01, // phase (animates particles)
+            1,                // variant (1=Vertical/rain)
+            200,              // density (0-255)
+            30,               // size (0-255)
+            20,               // glow (0-255)
+            10,               // streak_length (0-63)
+            0xFFFFFF00,       // color_primary (white)
+            0x808080FF,       // color_secondary (gray)
+            50,               // parallax_rate
+            20,               // parallax_size
+            (TICK % 65536) as u32, // phase
         );
 
         // Layer 1: Orange sunset gradient
+        // env_gradient(layer, zenith, sky_horizon, ground_horizon, nadir, rotation, shift)
         env_gradient(
             1,
-            0xFF6600FF,       // top (orange)
-            0x330000FF,       // bottom (dark red)
-            0.3,
+            0x330000FF,       // zenith (dark red)
+            0xFF6600FF,       // sky_horizon (orange)
+            0x660000FF,       // ground_horizon (dark orange)
+            0x000000FF,       // nadir (black)
+            0.0,              // rotation
+            0.0,              // shift
         );
     }
 }
@@ -972,25 +1000,34 @@ fn setup_epu_scatter_field() {
 fn setup_epu_ring_void() {
     unsafe {
         // Layer 0: Pulsing rings
-        let pulse = libm::sinf(TICK as f32 * 0.05) * 0.5 + 0.5;
-
+        // env_rings(layer, ring_count, thickness, color_a, color_b,
+        //           center_color, center_falloff, spiral_twist,
+        //           axis_x, axis_y, axis_z, phase)
         env_rings(
             0,                // layer
-            0xFF00FF80,       // color (magenta)
-            0.0, 0.0,         // center x, y
-            0.5 + pulse,      // inner radius (pulsing)
-            8.0,              // outer radius
-            6,                // ring count
-            0.02,             // ring width
-            TICK as f32 * 0.02, // phase (rotation)
+            8,                // ring_count
+            40,               // thickness (0-255)
+            0xFF00FF80,       // color_a (magenta)
+            0x8000FF40,       // color_b (purple)
+            0xFFFFFFFF,       // center_color (white)
+            100,              // center_falloff
+            30.0,             // spiral_twist (degrees)
+            0.0,              // axis_x
+            0.0,              // axis_y
+            1.0,              // axis_z (facing camera)
+            (TICK % 65536) as u32, // phase (rotation)
         );
 
         // Layer 1: Dark background
+        // env_gradient(layer, zenith, sky_horizon, ground_horizon, nadir, rotation, shift)
         env_gradient(
             1,
-            0x0a001aFF,
-            0x000000FF,
-            0.5,
+            0x000000FF,       // zenith (black)
+            0x0a001aFF,       // sky_horizon (very dark purple)
+            0x0a001aFF,       // ground_horizon
+            0x000000FF,       // nadir (black)
+            0.0,              // rotation
+            0.0,              // shift
         );
     }
 }
@@ -1019,7 +1056,7 @@ fn render_stage() {
             push_identity();
             push_translate(platform.x + platform.width / 2.0, platform.y + platform.height / 2.0, 0.0);
             push_scale(platform.width, platform.height, 0.1);
-            draw_mesh_cube();
+            draw_mesh(CUBE_MESH);
         }
     }
 }
@@ -1045,7 +1082,7 @@ fn render_players() {
             // Flip based on facing
             let scale_x = if player.facing_right { PLAYER_WIDTH } else { -PLAYER_WIDTH };
             push_scale(scale_x, PLAYER_HEIGHT, 0.3);
-            draw_mesh_cube();
+            draw_mesh(CUBE_MESH);
 
             // Draw melee slash effect
             if player.melee_timer > 0 {
@@ -1064,7 +1101,7 @@ fn render_players() {
                     0.2,
                 );
                 push_scale(MELEE_RANGE, PLAYER_HEIGHT * 0.5, 0.1);
-                draw_mesh_cube();
+                draw_mesh(CUBE_MESH);
             }
 
             // Ammo indicator (small dots above player)
@@ -1077,7 +1114,7 @@ fn render_players() {
                     0.1,
                 );
                 push_scale(0.15, 0.15, 0.1);
-                draw_mesh_cube();
+                draw_mesh(CUBE_MESH);
             }
         }
     }
@@ -1095,7 +1132,7 @@ fn render_bullets() {
             push_identity();
             push_translate(bullet.x, bullet.y, 0.15);
             push_scale(0.2, 0.2, 0.2);
-            draw_mesh_cube();
+            draw_mesh(CUBE_MESH);
         }
     }
 }
