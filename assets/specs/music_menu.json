@@ -48,35 +48,43 @@
       "instruments": [
         {
           "name": "pad_warm",
-          "ref": "instruments/inst_pad_warm.json"
+          "ref": "instruments/inst_pad_warm.json",
+          "envelope": {"attack": 0.15, "decay": 0.4, "sustain": 0.9, "release": 0.6}
         },
         {
           "name": "pad_bright",
-          "ref": "instruments/inst_pad_bright.json"
+          "ref": "instruments/inst_pad_bright.json",
+          "envelope": {"attack": 0.1, "decay": 0.35, "sustain": 0.85, "release": 0.5}
         },
         {
           "name": "arp_bright",
-          "ref": "instruments/inst_arp_bright.json"
+          "ref": "instruments/inst_arp_bright.json",
+          "envelope": {"attack": 0.0, "decay": 0.08, "sustain": 0.0, "release": 0.08}
         },
         {
           "name": "lead_saw",
-          "ref": "instruments/inst_lead_saw.json"
+          "ref": "instruments/inst_lead_saw.json",
+          "envelope": {"attack": 0.01, "decay": 0.12, "sustain": 0.6, "release": 0.18}
         },
         {
           "name": "bass_multi",
-          "ref": "instruments/inst_bass_multi.json"
+          "ref": "instruments/inst_bass_multi.json",
+          "envelope": {"attack": 0.0, "decay": 0.1, "sustain": 0.35, "release": 0.12}
         },
         {
           "name": "perc_soft",
-          "ref": "instruments/inst_perc_soft.json"
+          "ref": "instruments/inst_perc_soft.json",
+          "envelope": {"attack": 0.0, "decay": 0.03, "sustain": 0.0, "release": 0.05}
         },
         {
           "name": "stab",
-          "ref": "instruments/inst_stab.json"
+          "ref": "instruments/inst_stab.json",
+          "envelope": {"attack": 0.0, "decay": 0.12, "sustain": 0.0, "release": 0.12}
         },
         {
           "name": "sub_deep",
-          "ref": "instruments/inst_sub_deep.json"
+          "ref": "instruments/inst_sub_deep.json",
+          "envelope": {"attack": 0.0, "decay": 0.2, "sustain": 0.85, "release": 0.25}
         }
       ],
       "defs": {
@@ -201,116 +209,28 @@
           }
         },
         "arp_am7": {
-          "op": "prob",
-          "p_permille": 850,
-          "seed_salt": "arp_am",
-          "body": {
-            "op": "emit_seq",
-            "at": {
-              "op": "euclid",
-              "pulses": 5,
-              "steps": 16,
-              "stride": 1
-            },
-            "cell": {
-              "channel": "arp",
-              "inst": "arp_bright",
-              "vol": 32
-            },
-            "note_seq": {
-              "mode": "cycle",
-              "values": [
-                "A4",
-                "C5",
-                "E5",
-                "G5"
-              ]
-            }
-          }
+          "op": "emit_seq",
+          "at": {"op": "euclid", "pulses": 10, "steps": 32, "stride": 1},
+          "cell": {"channel": "arp", "inst": "arp_bright", "vol": 32},
+          "note_seq": {"mode": "cycle", "values": ["A4", "C5", "E5", "G5"]}
         },
         "arp_fmaj7": {
-          "op": "prob",
-          "p_permille": 850,
-          "seed_salt": "arp_f",
-          "body": {
-            "op": "emit_seq",
-            "at": {
-              "op": "euclid",
-              "pulses": 5,
-              "steps": 16,
-              "stride": 1
-            },
-            "cell": {
-              "channel": "arp",
-              "inst": "arp_bright",
-              "vol": 32
-            },
-            "note_seq": {
-              "mode": "cycle",
-              "values": [
-                "F4",
-                "A4",
-                "C5",
-                "E5"
-              ]
-            }
-          }
+          "op": "emit_seq",
+          "at": {"op": "euclid", "pulses": 10, "steps": 32, "stride": 1},
+          "cell": {"channel": "arp", "inst": "arp_bright", "vol": 32},
+          "note_seq": {"mode": "cycle", "values": ["F4", "A4", "C5", "E5"]}
         },
         "arp_cmaj7": {
-          "op": "prob",
-          "p_permille": 850,
-          "seed_salt": "arp_c",
-          "body": {
-            "op": "emit_seq",
-            "at": {
-              "op": "euclid",
-              "pulses": 5,
-              "steps": 16,
-              "stride": 1
-            },
-            "cell": {
-              "channel": "arp",
-              "inst": "arp_bright",
-              "vol": 32
-            },
-            "note_seq": {
-              "mode": "cycle",
-              "values": [
-                "C4",
-                "E4",
-                "G4",
-                "B4"
-              ]
-            }
-          }
+          "op": "emit_seq",
+          "at": {"op": "euclid", "pulses": 10, "steps": 32, "stride": 1},
+          "cell": {"channel": "arp", "inst": "arp_bright", "vol": 32},
+          "note_seq": {"mode": "cycle", "values": ["C4", "E4", "G4", "B4"]}
         },
         "arp_g7": {
-          "op": "prob",
-          "p_permille": 850,
-          "seed_salt": "arp_g",
-          "body": {
-            "op": "emit_seq",
-            "at": {
-              "op": "euclid",
-              "pulses": 5,
-              "steps": 16,
-              "stride": 1
-            },
-            "cell": {
-              "channel": "arp",
-              "inst": "arp_bright",
-              "vol": 32
-            },
-            "note_seq": {
-              "mode": "cycle",
-              "values": [
-                "G4",
-                "B4",
-                "D5",
-                "F5"
-              ]
-            }
-          }
+          "op": "emit_seq",
+          "at": {"op": "euclid", "pulses": 10, "steps": 32, "stride": 1},
+          "cell": {"channel": "arp", "inst": "arp_bright", "vol": 32},
+          "note_seq": {"mode": "cycle", "values": ["G4", "B4", "D5", "F5"]}
         },
         "lead_motif_am": {
           "op": "emit_seq",
