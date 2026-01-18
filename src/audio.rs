@@ -9,6 +9,9 @@ use crate::ffi::*;
 // SOUND HANDLES
 // =============================================================================
 
+pub static mut SFX_VOL: f32 = 0.85;
+pub static mut MUSIC_VOL: f32 = 0.6;
+
 // Sound handles (loaded at init)
 pub static mut SND_SHOOT: u32 = 0;
 pub static mut SND_HIT: u32 = 0;
@@ -71,7 +74,7 @@ pub fn init_audio() {
 #[allow(dead_code)]
 pub fn play(sound: u32, volume: f32, pan: f32) {
     unsafe {
-        play_sound(sound, volume, pan);
+        play_sound(sound, (volume * SFX_VOL).min(1.0), pan);
     }
 }
 
@@ -85,28 +88,28 @@ pub fn play(sound: u32, volume: f32, pan: f32) {
 /// * `pan` - -1.0 (left) to 1.0 (right), based on player x position
 pub fn play_shoot(pan: f32) {
     unsafe {
-        play_sound(SND_SHOOT, 0.8, pan);
+        play_sound(SND_SHOOT, (0.8 * SFX_VOL).min(1.0), pan);
     }
 }
 
 /// Play hit sound (melee hit or bullet impact)
 pub fn play_hit() {
     unsafe {
-        play_sound(SND_HIT, 1.0, 0.0);
+        play_sound(SND_HIT, SFX_VOL.min(1.0), 0.0);
     }
 }
 
 /// Play death sound
 pub fn play_death() {
     unsafe {
-        play_sound(SND_DEATH, 1.0, 0.0);
+        play_sound(SND_DEATH, SFX_VOL.min(1.0), 0.0);
     }
 }
 
 /// Play deflect sound (melee parry)
 pub fn play_deflect() {
     unsafe {
-        play_sound(SND_DEFLECT, 0.9, 0.0);
+        play_sound(SND_DEFLECT, (0.9 * SFX_VOL).min(1.0), 0.0);
     }
 }
 
@@ -116,21 +119,21 @@ pub fn play_deflect() {
 /// * `pan` - -1.0 (left) to 1.0 (right), based on player x position
 pub fn play_jump(pan: f32) {
     unsafe {
-        play_sound(SND_JUMP, 0.6, pan);
+        play_sound(SND_JUMP, (0.6 * SFX_VOL).min(1.0), pan);
     }
 }
 
 /// Play countdown beep (3, 2, 1)
 pub fn play_countdown() {
     unsafe {
-        play_sound(SND_COUNTDOWN, 0.7, 0.0);
+        play_sound(SND_COUNTDOWN, (0.7 * SFX_VOL).min(1.0), 0.0);
     }
 }
 
 /// Play GO sound (match start)
 pub fn play_go() {
     unsafe {
-        play_sound(SND_GO, 1.0, 0.0);
+        play_sound(SND_GO, SFX_VOL.min(1.0), 0.0);
     }
 }
 
@@ -140,14 +143,14 @@ pub fn play_go() {
 /// * `pan` - -1.0 (left) to 1.0 (right), based on player x position
 pub fn play_spawn(pan: f32) {
     unsafe {
-        play_sound(SND_SPAWN, 0.8, pan);
+        play_sound(SND_SPAWN, (0.8 * SFX_VOL).min(1.0), pan);
     }
 }
 
 /// Play victory fanfare (match end celebration)
 pub fn play_victory() {
     unsafe {
-        play_sound(SND_VICTORY, 1.0, 0.0);
+        play_sound(SND_VICTORY, SFX_VOL.min(1.0), 0.0);
     }
 }
 
@@ -158,7 +161,7 @@ pub fn play_victory() {
 /// Play menu/title screen music
 pub fn play_menu_music() {
     unsafe {
-        music_play(MUSIC_MENU, 0.6, 1); // volume 0.6, looping=1
+        music_play(MUSIC_MENU, MUSIC_VOL, 1);
     }
 }
 
@@ -174,7 +177,7 @@ pub fn play_music_for_stage(stage: u32) {
             2 => MUSIC_RING,
             _ => MUSIC_GRID, // Default to Grid Arena music
         };
-        music_play(handle, 0.5, 1); // volume 0.5, looping=1
+        music_play(handle, MUSIC_VOL, 1);
     }
 }
 
@@ -192,6 +195,14 @@ pub fn stop_music() {
 #[allow(dead_code)]
 pub fn set_music_volume(volume: f32) {
     unsafe {
-        music_set_volume(volume);
+        MUSIC_VOL = volume.clamp(0.0, 1.0);
+        music_set_volume(MUSIC_VOL);
+    }
+}
+
+/// Set global SFX volume (applied to all `play_*` calls).
+pub fn set_sfx_volume(volume: f32) {
+    unsafe {
+        SFX_VOL = volume.clamp(0.0, 1.0);
     }
 }

@@ -5,13 +5,15 @@
 use crate::combat::BULLETS;
 use crate::ffi::*;
 use crate::game_state::{
-    GamePhase, TransitionPhase, EFFECT_LIGHTS, GAME_STATE, IMPACT_FLASH, MATCH_END_TICK,
-    ROUND_NUMBER, TICK, TRANSITION_PHASE, TRANSITION_PROGRESS,
+    GamePhase, PausePage, TransitionPhase, CONFIG, DEFLECT_PLAYER, DEFLECT_POPUP_TICKS,
+    EFFECT_LIGHTS, GAME_STATE, IMPACT_FLASH, LOBBY_INDEX, MATCH_END_TICK, OPTIONS, PAUSE_INDEX,
+    PAUSE_PAGE, ROUND_NUMBER, STAGE_SELECT_RANDOM, STAGE_SELECT_ROTATE, TICK, TRANSITION_PHASE,
+    TRANSITION_PROGRESS,
 };
 use crate::particles::PARTICLES;
 use crate::player::{
-    abs, KILLS_TO_WIN, MELEE_DURATION, MELEE_WINDUP_DURATION, PLAYERS, PLAYER_COLORS,
-    PLAYER_HEIGHT, PLAYER_WIDTH, TRAIL_COUNT, TRAIL_VELOCITY_THRESHOLD,
+    abs, MELEE_DURATION, MELEE_WINDUP_DURATION, PLAYERS, PLAYER_COLORS, PLAYER_HEIGHT,
+    PLAYER_WIDTH, SPAWN_INVULN_FRAMES, TRAIL_COUNT, TRAIL_VELOCITY_THRESHOLD,
 };
 use crate::stage::PLATFORMS;
 
@@ -99,29 +101,71 @@ fn ease_out_bounce(t: f32) -> f32 {
     }
 }
 
+fn stage_name(stage: u32) -> &'static str {
+    match stage {
+        0 => "GRID ARENA",
+        1 => "SCATTER FIELD",
+        2 => "RING VOID",
+        _ => "ARENA",
+    }
+}
+
+fn stage_select_label(sel: u32) -> &'static str {
+    if sel == STAGE_SELECT_RANDOM {
+        "RANDOM"
+    } else if sel == STAGE_SELECT_ROTATE {
+        "ROTATE"
+    } else {
+        stage_name(sel)
+    }
+}
+
+fn u32_to_str(mut v: u32, buf: &mut [u8; 10]) -> &str {
+    if v == 0 {
+        buf[0] = b'0';
+        // SAFETY: single ASCII digit.
+        return unsafe { core::str::from_utf8_unchecked(&buf[..1]) };
+    }
+
+    let mut tmp = [0u8; 10];
+    let mut len = 0usize;
+    while v > 0 && len < tmp.len() {
+        tmp[len] = b'0' + (v % 10) as u8;
+        v /= 10;
+        len += 1;
+    }
+
+    for i in 0..len {
+        buf[i] = tmp[len - 1 - i];
+    }
+
+    // SAFETY: ASCII digits only.
+    unsafe { core::str::from_utf8_unchecked(&buf[..len]) }
+}
+
+fn mmss_to_str(total_secs: u32, buf: &mut [u8; 6]) -> &str {
+    let minutes = (total_secs / 60).min(99);
+    let seconds = total_secs % 60;
+    buf[0] = b'0' + ((minutes / 10) as u8);
+    buf[1] = b'0' + ((minutes % 10) as u8);
+    buf[2] = b':';
+    buf[3] = b'0' + ((seconds / 10) as u8);
+    buf[4] = b'0' + ((seconds % 10) as u8);
+    // SAFETY: fixed ASCII pattern "MM:SS".
+    unsafe { core::str::from_utf8_unchecked(&buf[..5]) }
+}
+
 // =============================================================================
 // EPU SETUP
 // =============================================================================
 
 fn setup_epu_grid_arena() {
     unsafe {
-        // Layer 0: Synthwave grid floor
-        env_lines(
-            0,            // layer
-            0,            // variant (0=Floor)
-            2,            // line_type (2=Grid)
-            20,           // thickness (0-255)
-            0.5,          // spacing
-            30.0,         // fade_distance
-            0x00FFFFFF,   // color_primary (cyan)
-            0x00808080,   // color_accent (dim cyan)
-            4,            // accent_every (every 4th line)
-            TICK % 65536, // phase (scroll animation)
-        );
+        env_blend(3); // Screen blend for the overlay glow
 
-        // Layer 1: Gradient sky
+        // Layer 0: Gradient sky
         env_gradient(
-            1,          // layer
+            0,          // layer
             0x0a001aff, // zenith (dark purple-black)
             0x1a0a2eff, // sky_horizon (purple)
             0x1a0a2eff, // ground_horizon (purple)
@@ -135,30 +179,41 @@ fn setup_epu_grid_arena() {
             0,          // horizon_haze
             0,          // sun_warmth
             0,          // cloudiness
+            0,          // cloud_phase
+        );
+
+        // Layer 1: Synthwave grid floor
+        env_lines(
+            1,            // layer
+            0,            // variant (0=Floor)
+            2,            // line_type (2=Grid)
+            20,           // thickness (0-255)
+            0.75,         // spacing
+            45.0,         // fade_distance
+            96,           // parallax (also selects depth slices)
+            0x00FFFFFF,   // color_primary (cyan)
+            0x40FFFFFF,   // color_accent (cyan glow)
+            4,            // accent_every (every 4th line)
+            TICK % 65536, // phase (scroll animation)
+            0,            // profile (0=Grid)
+            24,           // warp
+            0,            // wobble
+            128,          // glow
+            0.0,          // axis_x
+            0.0,          // axis_y
+            1.0,          // axis_z
+            0,            // seed (auto)
         );
     }
 }
 
 fn setup_epu_scatter_field() {
     unsafe {
-        // Layer 0: Falling particles
-        env_scatter(
-            0,            // layer
-            1,            // variant (1=Vertical/rain)
-            200,          // density (0-255)
-            30,           // size (0-255)
-            20,           // glow (0-255)
-            10,           // streak_length (0-63)
-            0xFFFFFF00,   // color_primary (white)
-            0x808080FF,   // color_secondary (gray)
-            50,           // parallax_rate
-            20,           // parallax_size
-            TICK % 65536, // phase
-        );
+        env_blend(0); // Alpha
 
-        // Layer 1: Orange sunset gradient
+        // Layer 0: Orange sunset gradient
         env_gradient(
-            1,          // layer
+            0,          // layer
             0x330000FF, // zenith (dark red)
             0xFF6600FF, // sky_horizon (orange)
             0x660000FF, // ground_horizon (dark orange)
@@ -172,35 +227,45 @@ fn setup_epu_scatter_field() {
             100,        // horizon_haze
             200,        // sun_warmth
             0,          // cloudiness
+            0,          // cloud_phase
+        );
+
+        // Layer 1: Falling particles (Cells family 0, variant 1 = rain)
+        env_cells(
+            1,            // layer
+            0,            // family (0=Particles)
+            1,            // variant (1=Rain)
+            200,          // density
+            2,            // size_min
+            10,           // size_max
+            200,          // intensity
+            220,          // shape
+            96,           // motion
+            140,          // parallax
+            120,          // height_bias
+            60,           // clustering
+            0xFFFFFFFF,   // color_a
+            0x808080FF,   // color_b
+            0.0,          // axis_x
+            0.0,          // axis_y
+            1.0,          // axis_z
+            TICK % 65536, // phase
+            0,            // seed (auto)
         );
     }
 }
 
 fn setup_epu_ring_void() {
     unsafe {
-        // Layer 0: Pulsing rings
-        env_rings(
-            0,            // layer
-            8,            // ring_count
-            40,           // thickness (0-255)
-            0xFF00FF80,   // color_a (magenta)
-            0x8000FF40,   // color_b (purple)
-            0xFFFFFFFF,   // center_color (white)
-            100,          // center_falloff
-            30.0,         // spiral_twist (degrees)
-            0.0,          // axis_x
-            0.0,          // axis_y
-            1.0,          // axis_z (facing camera)
-            TICK % 65536, // phase (rotation)
-        );
+        env_blend(1); // Additive for a punchy portal
 
-        // Layer 1: Dark background
+        // Layer 0: Dark background
         env_gradient(
-            1,          // layer
-            0x000000ff, // zenith (black)
-            0x0a001aff, // sky_horizon (very dark purple)
-            0x0a001aff, // ground_horizon
-            0x000000ff, // nadir (black)
+            0,          // layer
+            0x000000FF, // zenith (black)
+            0x0a001aFF, // sky_horizon (very dark purple)
+            0x0a001aFF, // ground_horizon
+            0x000000FF, // nadir (black)
             0.0,        // rotation
             0.0,        // shift
             0.0,        // sun_elevation (no sun)
@@ -210,6 +275,29 @@ fn setup_epu_ring_void() {
             0,          // horizon_haze
             0,          // sun_warmth
             0,          // cloudiness
+            0,          // cloud_phase
+        );
+
+        // Layer 1: Pulsing rings
+        env_rings(
+            1,                    // layer
+            0,                    // family (0=Portal)
+            8,                    // ring_count
+            40,                   // thickness (0-255)
+            0xFF00FF80,           // color_a (magenta)
+            0x8000FF40,           // color_b (purple)
+            0xFFFFFFFF,           // center_color (white)
+            100,                  // center_falloff
+            30.0,                 // spiral_twist (degrees)
+            0.0,                  // axis_x
+            0.0,                  // axis_y
+            1.0,                  // axis_z (facing camera)
+            TICK % 65536,         // phase (rotation)
+            (TICK * 137) % 65536, // wobble
+            32,                   // noise
+            24,                   // dash
+            160,                  // glow
+            41,                   // seed
         );
     }
 }
@@ -264,6 +352,39 @@ pub fn render_stage() {
                 draw_mesh(CUBE_MESH);
             }
         }
+
+        // Overtime: lethal neon walls close in.
+        if GAME_STATE.overtime {
+            let left = GAME_STATE.arena_left;
+            let right = GAME_STATE.arena_right;
+            let wall_w = 0.25;
+            let wall_h = 18.0;
+            let wall_y = 2.0;
+
+            // Core wall
+            set_color(0xFF0000CC);
+            push_identity();
+            push_translate(left + wall_w * 0.5, wall_y, 0.1);
+            push_scale(wall_w, wall_h, 0.4);
+            draw_mesh(CUBE_MESH);
+
+            push_identity();
+            push_translate(right - wall_w * 0.5, wall_y, 0.1);
+            push_scale(wall_w, wall_h, 0.4);
+            draw_mesh(CUBE_MESH);
+
+            // Glow shell
+            set_color(0xFF004060);
+            push_identity();
+            push_translate(left + wall_w * 0.5, wall_y, 0.35);
+            push_scale(wall_w * 2.5, wall_h * 1.02, 0.05);
+            draw_mesh(CUBE_MESH);
+
+            push_identity();
+            push_translate(right - wall_w * 0.5, wall_y, 0.35);
+            push_scale(wall_w * 2.5, wall_h * 1.02, 0.05);
+            draw_mesh(CUBE_MESH);
+        }
     }
 }
 
@@ -314,9 +435,9 @@ pub fn render_players() {
             let stretch_x = 1.0 - player.squash_stretch * 0.2; // Inverse for volume preservation
 
             // --- Respawn invincibility blink ---
-            let visible = if player.spawn_flash > 0 {
+            let visible = if player.invuln_timer > 0 {
                 // Blink every 4 frames
-                (player.spawn_flash / 4) % 2 == 0
+                (player.invuln_timer / 4) % 2 == 0
             } else {
                 true
             };
@@ -451,6 +572,18 @@ pub fn render_players() {
                 let ring_scale = 1.5 - flash_progress * 0.5; // Expands from 1.0 to 1.5
                 push_scale(ring_scale, ring_scale, 0.1);
                 set_color(flash_color);
+                draw_mesh(SPHERE_MESH);
+            }
+
+            // Invulnerability aura (subtle cyan shimmer)
+            if player.invuln_timer > 0 {
+                let t = player.invuln_timer as f32 / SPAWN_INVULN_FRAMES.max(1) as f32;
+                let pulse = libm::sinf(TICK as f32 * 0.25) * 0.08 + 1.0;
+                let alpha = (t * 100.0) as u32;
+                set_color(with_alpha(0x00FFFFFF, alpha));
+                push_identity();
+                push_translate(center_x, center_y, 0.05);
+                push_scale(1.25 * pulse, 1.35 * pulse, 0.12);
                 draw_mesh(SPHERE_MESH);
             }
 
@@ -633,6 +766,284 @@ fn render_title() {
     }
 }
 
+fn render_lobby() {
+    unsafe {
+        setup_epu_grid_arena();
+        draw_env();
+
+        // Panel
+        set_color(0x000000B0);
+        draw_rect(140.0, 70.0, 680.0, 400.0);
+
+        // Header
+        set_color(0x00FFFFFF);
+        draw_text_str("LOBBY", 410.0, 95.0, 36.0);
+
+        // Player slots
+        let connected = player_count().min(4) as usize;
+        let mut y = 155.0;
+        for i in 0..4 {
+            let label = match i {
+                0 => "P1",
+                1 => "P2",
+                2 => "P3",
+                _ => "P4",
+            };
+
+            // Color swatch
+            set_color(PLAYER_COLORS[i]);
+            draw_rect(175.0, y + 4.0, 18.0, 18.0);
+
+            set_color(0xFFFFFFFF);
+            draw_text_str(label, 205.0, y, 20.0);
+
+            let (status, color) = if i < connected {
+                if PLAYERS[i].ready {
+                    ("READY", 0x00FF00FF)
+                } else {
+                    ("PRESS A", 0xAAAAAAFF)
+                }
+            } else if CONFIG.fill_bots {
+                ("CPU", 0x00FFFFFF)
+            } else {
+                ("---", 0x666666FF)
+            };
+
+            set_color(color);
+            draw_text_str(status, 280.0, y, 20.0);
+
+            y += 34.0;
+        }
+
+        // Match settings (P1 controls)
+        let settings_x = 460.0;
+        let mut sy = 155.0;
+
+        // Helper: highlight row
+        let highlight = |idx: u32, y: f32| {
+            if LOBBY_INDEX == idx {
+                set_color(0x00FFFF30);
+                draw_rect(settings_x - 14.0, y - 2.0, 330.0, 26.0);
+            }
+        };
+
+        // Stage
+        highlight(0, sy);
+        set_color(0xFFFFFFFF);
+        draw_text_str("STAGE", settings_x, sy, 18.0);
+        set_color(0x00FFFFFF);
+        draw_text_str(
+            stage_select_label(CONFIG.stage_select),
+            settings_x + 120.0,
+            sy,
+            18.0,
+        );
+        sy += 32.0;
+
+        // Kills
+        highlight(1, sy);
+        set_color(0xFFFFFFFF);
+        draw_text_str("KILLS", settings_x, sy, 18.0);
+        let mut buf = [0u8; 10];
+        set_color(0xFFFF00FF);
+        draw_text_str(
+            u32_to_str(CONFIG.kills_to_win, &mut buf),
+            settings_x + 120.0,
+            sy,
+            18.0,
+        );
+        sy += 32.0;
+
+        // Time
+        highlight(2, sy);
+        set_color(0xFFFFFFFF);
+        draw_text_str("TIME", settings_x, sy, 18.0);
+        if CONFIG.round_time_seconds == 0 {
+            set_color(0xAAAAAAFF);
+            draw_text_str("INFINITE", settings_x + 120.0, sy, 18.0);
+        } else {
+            let mut tbuf = [0u8; 10];
+            set_color(0xAAAAAAFF);
+            draw_text_str(
+                u32_to_str(CONFIG.round_time_seconds, &mut tbuf),
+                settings_x + 120.0,
+                sy,
+                18.0,
+            );
+            draw_text_str("s", settings_x + 150.0, sy, 18.0);
+        }
+        sy += 32.0;
+
+        // CPUs
+        highlight(3, sy);
+        set_color(0xFFFFFFFF);
+        draw_text_str("FILL CPU", settings_x, sy, 18.0);
+        set_color(if CONFIG.fill_bots {
+            0x00FF00FF
+        } else {
+            0xFF0000FF
+        });
+        draw_text_str(
+            if CONFIG.fill_bots { "ON" } else { "OFF" },
+            settings_x + 120.0,
+            sy,
+            18.0,
+        );
+        sy += 32.0;
+
+        // CPU difficulty
+        highlight(4, sy);
+        set_color(0xFFFFFFFF);
+        draw_text_str("CPU", settings_x, sy, 18.0);
+        let diff = match CONFIG.bot_difficulty {
+            0 => "EASY",
+            1 => "NORMAL",
+            _ => "HARD",
+        };
+        set_color(0xFF00FFFF);
+        draw_text_str(diff, settings_x + 120.0, sy, 18.0);
+
+        // Footer instructions
+        set_color(0x808080FF);
+        draw_text_str(
+            "Players: A to ready | P1: D-Pad to change | START: begin | B: title",
+            175.0,
+            430.0,
+            14.0,
+        );
+
+        // Eligibility hint
+        let ready_humans = PLAYERS.iter().take(connected).filter(|p| p.ready).count() as u32;
+        let cpu_fill = if CONFIG.fill_bots {
+            (4 - connected) as u32
+        } else {
+            0
+        };
+        let total = ready_humans + cpu_fill;
+        if total < 2 {
+            set_color(0xFF4040FF);
+            draw_text_str("Need 2 players to start", 360.0, 455.0, 16.0);
+        }
+    }
+}
+
+fn render_pause() {
+    unsafe {
+        // Dark overlay
+        set_color(0x000000A8);
+        draw_rect(0.0, 0.0, 960.0, 540.0);
+
+        // Panel
+        set_color(0x000000D0);
+        draw_rect(300.0, 120.0, 360.0, 300.0);
+
+        set_color(0x00FFFFFF);
+        draw_text_str("PAUSED", 405.0, 145.0, 30.0);
+
+        let base_x = 330.0;
+        let mut y = 200.0;
+
+        match PAUSE_PAGE {
+            PausePage::Main => {
+                let items = [
+                    "RESUME",
+                    "RESTART ROUND",
+                    "RESTART MATCH",
+                    "RETURN TO LOBBY",
+                    "OPTIONS",
+                ];
+                for (i, item) in items.iter().enumerate() {
+                    if PAUSE_INDEX == i as u32 {
+                        set_color(0x00FFFF30);
+                        draw_rect(base_x - 10.0, y - 3.0, 320.0, 26.0);
+                    }
+                    set_color(0xFFFFFFFF);
+                    draw_text_str(item, base_x, y, 18.0);
+                    y += 32.0;
+                }
+            }
+            PausePage::Options => {
+                // Music volume
+                if PAUSE_INDEX == 0 {
+                    set_color(0x00FFFF30);
+                    draw_rect(base_x - 10.0, y - 3.0, 320.0, 26.0);
+                }
+                set_color(0xFFFFFFFF);
+                draw_text_str("MUSIC", base_x, y, 18.0);
+                set_color(0x808080FF);
+                draw_rect(base_x + 120.0, y + 6.0, 180.0, 6.0);
+                set_color(0x00FF00FF);
+                draw_rect(base_x + 120.0, y + 6.0, 180.0 * OPTIONS.music_volume, 6.0);
+                y += 32.0;
+
+                // SFX volume
+                if PAUSE_INDEX == 1 {
+                    set_color(0x00FFFF30);
+                    draw_rect(base_x - 10.0, y - 3.0, 320.0, 26.0);
+                }
+                set_color(0xFFFFFFFF);
+                draw_text_str("SFX", base_x, y, 18.0);
+                set_color(0x808080FF);
+                draw_rect(base_x + 120.0, y + 6.0, 180.0, 6.0);
+                set_color(0xFFFF00FF);
+                draw_rect(base_x + 120.0, y + 6.0, 180.0 * OPTIONS.sfx_volume, 6.0);
+                y += 32.0;
+
+                // Shake
+                if PAUSE_INDEX == 2 {
+                    set_color(0x00FFFF30);
+                    draw_rect(base_x - 10.0, y - 3.0, 320.0, 26.0);
+                }
+                set_color(0xFFFFFFFF);
+                draw_text_str("SCREEN SHAKE", base_x, y, 18.0);
+                set_color(if OPTIONS.screen_shake {
+                    0x00FF00FF
+                } else {
+                    0xFF0000FF
+                });
+                draw_text_str(
+                    if OPTIONS.screen_shake { "ON" } else { "OFF" },
+                    base_x + 220.0,
+                    y,
+                    18.0,
+                );
+                y += 32.0;
+
+                // Flash
+                if PAUSE_INDEX == 3 {
+                    set_color(0x00FFFF30);
+                    draw_rect(base_x - 10.0, y - 3.0, 320.0, 26.0);
+                }
+                set_color(0xFFFFFFFF);
+                draw_text_str("SCREEN FLASH", base_x, y, 18.0);
+                set_color(if OPTIONS.screen_flash {
+                    0x00FF00FF
+                } else {
+                    0xFF0000FF
+                });
+                draw_text_str(
+                    if OPTIONS.screen_flash { "ON" } else { "OFF" },
+                    base_x + 220.0,
+                    y,
+                    18.0,
+                );
+                y += 32.0;
+
+                // Back
+                if PAUSE_INDEX == 4 {
+                    set_color(0x00FFFF30);
+                    draw_rect(base_x - 10.0, y - 3.0, 320.0, 26.0);
+                }
+                set_color(0xFFFFFFFF);
+                draw_text_str("BACK", base_x, y, 18.0);
+            }
+        }
+
+        set_color(0x808080FF);
+        draw_text_str("A: select | B/START: back", 350.0, 395.0, 14.0);
+    }
+}
+
 pub fn render_ui() {
     unsafe {
         // Impact flash overlay (drawn first, covers everything)
@@ -642,62 +1053,153 @@ pub fn render_ui() {
             draw_rect(0.0, 0.0, 960.0, 540.0);
         }
 
-        // Title screen
-        if GAME_STATE.phase == GamePhase::Title {
-            render_title();
-            return;
+        match GAME_STATE.phase {
+            GamePhase::Title => {
+                render_title();
+                return;
+            }
+            GamePhase::Lobby => {
+                render_lobby();
+                return;
+            }
+            GamePhase::Paused => {
+                render_pause();
+                return;
+            }
+            _ => {}
+        }
+
+        // Demo watermark
+        if GAME_STATE.demo_mode {
+            set_color(0x00FFFFFF);
+            draw_text_str("DEMO", 885.0, 12.0, 16.0);
         }
 
         // Score display
+        let active_count = PLAYERS.iter().filter(|p| p.active).count() as u32;
         set_color(0x000000AA);
-        draw_rect(10.0, 10.0, 200.0, 30.0 + (player_count() as f32 * 25.0));
+        draw_rect(10.0, 10.0, 260.0, 30.0 + (active_count as f32 * 28.0));
 
+        let win_kills = CONFIG.kills_to_win.max(1);
         let mut y = 40.0;
         for (i, player) in PLAYERS.iter().enumerate() {
             if !player.active {
                 continue;
             }
 
+            // Color swatch + label
             set_color(PLAYER_COLORS[i]);
-
-            // "P1: X" format
+            draw_rect(18.0, y + 4.0, 12.0, 12.0);
+            set_color(0xFFFFFFFF);
             let label = match i {
-                0 => "P1:",
-                1 => "P2:",
-                2 => "P3:",
-                _ => "P4:",
+                0 => "P1",
+                1 => "P2",
+                2 => "P3",
+                _ => "P4",
             };
-            draw_text_str(label, 20.0, y, 18.0);
+            draw_text_str(label, 35.0, y, 16.0);
 
-            // Kill count
-            let kills_str = match player.kills {
-                0 => "0",
-                1 => "1",
-                2 => "2",
-                3 => "3",
-                4 => "4",
-                _ => "5",
-            };
-            draw_text_str(kills_str, 70.0, y, 18.0);
+            if player.is_bot {
+                set_color(0x00FFFFFF);
+                draw_text_str("CPU", 68.0, y, 14.0);
+            }
 
-            // Goal indicator
+            // Kills / goal
+            let mut kbuf = [0u8; 10];
+            set_color(PLAYER_COLORS[i]);
+            draw_text_str(u32_to_str(player.kills, &mut kbuf), 125.0, y, 16.0);
             set_color(0x808080FF);
-            draw_text_str("/5", 90.0, y, 18.0);
+            draw_text_str("/", 145.0, y, 16.0);
+            let mut wbuf = [0u8; 10];
+            draw_text_str(u32_to_str(win_kills, &mut wbuf), 155.0, y, 16.0);
 
-            y += 25.0;
+            // Status
+            if player.dead {
+                set_color(0xFF4040FF);
+                draw_text_str("DEAD", 190.0, y, 14.0);
+                if player.respawn_timer > 0 {
+                    let secs = (player.respawn_timer + 59) / 60;
+                    let mut sbuf = [0u8; 10];
+                    set_color(0xCCCCCCFF);
+                    draw_text_str(u32_to_str(secs, &mut sbuf), 232.0, y, 14.0);
+                }
+            } else if player.invuln_timer > 0 {
+                set_color(0x00FFFFAA);
+                draw_text_str("SAFE", 190.0, y, 14.0);
+            }
+
+            y += 28.0;
         }
 
-        // Round counter (centered at top)
-        let round_text = match ROUND_NUMBER {
-            1 => "ROUND 1",
-            2 => "ROUND 2",
-            3 => "ROUND 3",
-            4 => "ROUND 4",
-            5 => "ROUND 5",
-            _ => "ROUND",
-        };
+        // Round + stage (top center)
         set_color(0xAAAAAAFF);
-        draw_text_str(round_text, 440.0, 30.0, 18.0);
+        draw_text_str("ROUND", 420.0, 20.0, 18.0);
+        let mut rbuf = [0u8; 10];
+        draw_text_str(u32_to_str(ROUND_NUMBER, &mut rbuf), 485.0, 20.0, 18.0);
+        set_color(0x808080FF);
+        draw_text_str(stage_name(GAME_STATE.current_stage), 410.0, 42.0, 14.0);
+
+        // Timer / overtime
+        if CONFIG.round_time_seconds > 0 {
+            if GAME_STATE.overtime {
+                let alpha = if (TICK / 15) % 2 == 0 { 255 } else { 180 };
+                set_color(with_alpha(0xFF4040FF, alpha));
+                draw_text_str("OVERTIME", 820.0, 20.0, 18.0);
+            } else {
+                let total_secs = (GAME_STATE.round_time_left + 59) / 60;
+                let mut tbuf = [0u8; 6];
+                set_color(0xFFFFFFFF);
+                draw_text_str(mmss_to_str(total_secs, &mut tbuf), 840.0, 20.0, 18.0);
+            }
+        }
+
+        // Deflect popup
+        if DEFLECT_POPUP_TICKS > 0 {
+            let a = (DEFLECT_POPUP_TICKS.min(20) * 12).min(220);
+            set_color(with_alpha(0x00FFFFFF, a));
+            let who = match DEFLECT_PLAYER {
+                0 => "P1",
+                1 => "P2",
+                2 => "P3",
+                _ => "P4",
+            };
+            draw_text_str(who, 420.0, 105.0, 18.0);
+            draw_text_str("DEFLECT!", 450.0, 105.0, 18.0);
+        }
+
+        // Final KO overlay
+        if GAME_STATE.phase == GamePhase::FinalKo {
+            let pulse = libm::sinf(TICK as f32 * 0.25) * 0.15 + 1.0;
+            set_color(0xFF4040FF);
+            draw_text_str("FINAL KO", 390.0, 80.0, 26.0 * pulse);
+        }
+
+        // Off-screen indicators (approximate mapping for vertical escapes)
+        {
+            let left = GAME_STATE.arena_left;
+            let right = GAME_STATE.arena_right;
+            let y_min = -8.0;
+            let y_max = 8.0;
+            let w = (right - left).max(0.001);
+
+            for (i, p) in PLAYERS.iter().enumerate() {
+                if !p.active || p.dead {
+                    continue;
+                }
+                let cx = p.x + PLAYER_WIDTH * 0.5;
+                let cy = p.y + PLAYER_HEIGHT * 0.5;
+                let nx = ((cx - left) / w).clamp(0.0, 1.0);
+                let sx = nx * 960.0;
+
+                if cy > y_max {
+                    set_color(PLAYER_COLORS[i]);
+                    draw_rect(sx - 10.0, 8.0, 20.0, 8.0);
+                } else if cy < y_min {
+                    set_color(PLAYER_COLORS[i]);
+                    draw_rect(sx - 10.0, 524.0, 20.0, 8.0);
+                }
+            }
+        }
 
         // Countdown with animation
         if GAME_STATE.phase == GamePhase::Countdown {
@@ -774,10 +1276,11 @@ pub fn render_ui() {
             set_color(0x00000000 | bg_alpha);
             draw_rect(0.0, 0.0, 960.0, 540.0);
 
-            // Find winner
-            let mut winner_idx = 0;
+            // Find winner (prefer stored winner_idx, but fall back to scanning)
+            let win_kills = CONFIG.kills_to_win.max(1);
+            let mut winner_idx = GAME_STATE.winner_idx as usize;
             for (i, player) in PLAYERS.iter().enumerate() {
-                if player.kills >= KILLS_TO_WIN {
+                if player.active && player.kills >= win_kills {
                     winner_idx = i;
                     break;
                 }
@@ -830,7 +1333,12 @@ pub fn render_ui() {
                 // Blinking prompt
                 let blink_alpha = if (anim_tick / 30) % 2 == 0 { 255 } else { 180 };
                 set_color(0xCCCCCC00 | blink_alpha);
-                draw_text_str("Press START to play again", 310.0 - sub_offset, 300.0, 16.0);
+                draw_text_str(
+                    "START: rematch    B: lobby",
+                    330.0 - sub_offset,
+                    300.0,
+                    16.0,
+                );
             }
 
             // Draw winner character in spotlight (larger, centered)

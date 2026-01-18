@@ -220,3 +220,31 @@ pub fn spawn_wall_slide_sparks(x: f32, y: f32, wall_on_right: bool) {
         }
     }
 }
+
+/// Spawn a crisp cyan burst for bullet deflects/parries.
+pub fn spawn_deflect_burst(x: f32, y: f32) {
+    unsafe {
+        let particle_count = 10;
+        for i in 0..particle_count {
+            for p in &mut PARTICLES {
+                if p.active {
+                    continue;
+                }
+                p.active = true;
+                p.x = x;
+                p.y = y;
+
+                let angle = (i as f32 / particle_count as f32) * core::f32::consts::TAU;
+                let speed = 0.08 + random_f32() * 0.10;
+                p.vx = libm::cosf(angle) * speed;
+                p.vy = libm::sinf(angle) * speed;
+
+                p.lifetime = 12 + (random_f32() * 10.0) as u32;
+                p.max_lifetime = p.lifetime;
+                p.color = if i % 2 == 0 { 0x00FFFFFF } else { 0xFFFFFFFF };
+                p.size = 0.07 + random_f32() * 0.05;
+                break;
+            }
+        }
+    }
+}

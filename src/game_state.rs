@@ -6,12 +6,69 @@
 #[derive(Clone, Copy, PartialEq)]
 pub enum GamePhase {
     Title,     // Main menu / title screen
+    Lobby,     // Join/ready + match settings
     Countdown, // 3-2-1 before round starts
     Playing,   // Active gameplay
+    Paused,    // Pause menu / options
+    FinalKo,   // Match-winning hit slow-mo
     #[allow(dead_code)]
     RoundEnd, // Someone got a kill, brief pause (reserved for future use)
     MatchEnd,  // Someone won the match
 }
+
+// =============================================================================
+// CONFIG + OPTIONS
+// =============================================================================
+
+/// Stage select setting:
+/// - 0..NUM_STAGES-1: fixed stage
+/// - NUM_STAGES: random each round
+/// - NUM_STAGES+1: rotate each round
+pub const STAGE_SELECT_RANDOM: u32 = NUM_STAGES;
+pub const STAGE_SELECT_ROTATE: u32 = NUM_STAGES + 1;
+
+#[derive(Clone, Copy)]
+pub struct GameConfig {
+    pub stage_select: u32,
+    pub kills_to_win: u32,
+    pub round_time_seconds: u32, // 0 = infinite
+    pub fill_bots: bool,
+    pub bot_difficulty: u32, // 0=Easy, 1=Normal, 2=Hard
+}
+
+impl GameConfig {
+    pub const fn new() -> Self {
+        Self {
+            stage_select: STAGE_SELECT_ROTATE,
+            kills_to_win: 5,
+            round_time_seconds: 45,
+            fill_bots: true,
+            bot_difficulty: 1,
+        }
+    }
+}
+
+#[derive(Clone, Copy)]
+pub struct Options {
+    pub music_volume: f32, // 0.0 - 1.0
+    pub sfx_volume: f32,   // 0.0 - 1.0
+    pub screen_shake: bool,
+    pub screen_flash: bool,
+}
+
+impl Options {
+    pub const fn new() -> Self {
+        Self {
+            music_volume: 0.6,
+            sfx_volume: 0.85,
+            screen_shake: true,
+            screen_flash: true,
+        }
+    }
+}
+
+pub static mut CONFIG: GameConfig = GameConfig::new();
+pub static mut OPTIONS: Options = Options::new();
 
 /// Main game state tracking match progress
 #[derive(Clone, Copy)]
@@ -20,6 +77,14 @@ pub struct GameState {
     pub countdown: u32,
     pub round_end_timer: u32,
     pub current_stage: u32,
+    pub round_time_left: u32,
+    pub overtime: bool,
+    pub arena_left: f32,
+    pub arena_right: f32,
+    pub winner_idx: u32,
+    pub final_ko_timer: u32,
+    pub demo_mode: bool,
+    pub paused_from: GamePhase,
 }
 
 impl GameState {
@@ -29,6 +94,14 @@ impl GameState {
             countdown: 180, // 3 seconds
             round_end_timer: 0,
             current_stage: 0,
+            round_time_left: 0,
+            overtime: false,
+            arena_left: -10.0,
+            arena_right: 10.0,
+            winner_idx: 0,
+            final_ko_timer: 0,
+            demo_mode: false,
+            paused_from: GamePhase::Playing,
         }
     }
 }
@@ -44,15 +117,29 @@ pub static mut ROUND_NUMBER: u32 = 1;
 /// Number of stages in the game
 pub const NUM_STAGES: u32 = 3;
 
+/// Title idle counter for attract/demo mode.
+pub static mut TITLE_IDLE_TICKS: u32 = 0;
+
+/// Deflect popup (short UI feedback when someone parries a bullet)
+pub static mut DEFLECT_POPUP_TICKS: u32 = 0;
+pub static mut DEFLECT_PLAYER: u32 = 0;
+
 // =============================================================================
-// STAGE ROTATION
+// MENU STATE
 // =============================================================================
 
-/// Advance to the next stage (cycles through 0, 1, 2, 0, ...)
-pub fn advance_stage() {
-    unsafe {
-        GAME_STATE.current_stage = (GAME_STATE.current_stage + 1) % NUM_STAGES;
-    }
+#[derive(Clone, Copy, PartialEq)]
+pub enum PausePage {
+    Main,
+    Options,
+}
+
+pub static mut PAUSE_PAGE: PausePage = PausePage::Main;
+pub static mut PAUSE_INDEX: u32 = 0;
+pub static mut LOBBY_INDEX: u32 = 0;
+
+pub fn round_time_limit_ticks() -> u32 {
+    unsafe { CONFIG.round_time_seconds.saturating_mul(60) }
 }
 
 // =============================================================================
@@ -106,6 +193,9 @@ pub static mut SCREEN_SHAKE_Y: f32 = 0.0;
 /// Trigger screen shake with given intensity (0.0 - 1.0)
 pub fn trigger_shake(intensity: f32) {
     unsafe {
+        if !OPTIONS.screen_shake {
+            return;
+        }
         SCREEN_SHAKE = intensity.min(1.0);
     }
 }
@@ -142,6 +232,9 @@ pub static mut IMPACT_FLASH: u32 = 0;
 /// Trigger impact flash for 3 frames
 pub fn trigger_impact_flash() {
     unsafe {
+        if !OPTIONS.screen_flash {
+            return;
+        }
         IMPACT_FLASH = 3; // 3 frame flash
     }
 }
@@ -161,8 +254,6 @@ pub fn update_impact_flash() {
 pub const CAMERA_FOV_DEFAULT: f32 = 50.0;
 /// Zoomed in FOV for kill impact
 pub const CAMERA_FOV_MIN: f32 = 40.0;
-/// FOV return speed (frames to return to normal)
-pub const CAMERA_FOV_RETURN_SPEED: f32 = 0.67; // Per frame multiplier toward default
 
 /// Current camera FOV
 pub static mut CAMERA_FOV: f32 = CAMERA_FOV_DEFAULT;
@@ -280,6 +371,19 @@ pub fn reset_match_end_tick() {
 pub fn update_match_end_tick() {
     unsafe {
         MATCH_END_TICK += 1;
+    }
+}
+
+pub fn register_deflect(player_idx: u32) {
+    unsafe {
+        DEFLECT_PLAYER = player_idx.min(3);
+        DEFLECT_POPUP_TICKS = 45;
+    }
+}
+
+pub fn update_deflect_popup() {
+    unsafe {
+        DEFLECT_POPUP_TICKS = DEFLECT_POPUP_TICKS.saturating_sub(1);
     }
 }
 

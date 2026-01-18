@@ -360,16 +360,3 @@ pub fn get_spawn_position(player_idx: usize) -> (f32, f32) {
         (SPAWN_POINTS[stage][idx], SPAWN_POINTS[stage][idx + 1])
     }
 }
-
-/// Get respawn position (picks a random spawn point from the stage's set)
-/// This ensures respawns are always on valid platform locations
-pub fn get_respawn_position() -> (f32, f32) {
-    unsafe {
-        let stage = GAME_STATE.current_stage as usize;
-        let stage = stage.min(2); // Clamp to valid stage range
-                                  // Pick a random spawn point from the stage's 4 spawn points
-        let spawn_idx = crate::ffi::random_range(0, 4) as usize;
-        let idx = spawn_idx * 2;
-        (SPAWN_POINTS[stage][idx], SPAWN_POINTS[stage][idx + 1])
-    }
-}

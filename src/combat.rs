@@ -224,11 +224,17 @@ pub fn update_bullets() {
                         game_state::trigger_hit_freeze(3);
                         // Deflect effect light (cyan flash)
                         game_state::spawn_effect_light(bullet.x, bullet.y, 0x00FFFFFF, 2.0, 0.75);
+                        // Deflect particles + UI popup
+                        particles::spawn_deflect_burst(bullet.x, bullet.y);
+                        game_state::register_deflect(i as u32);
                         continue;
                     }
                 }
 
                 // Hit detection
+                if player.invuln_timer > 0 {
+                    continue;
+                }
                 let px = player.x;
                 let py = player.y;
                 let pw = PLAYER_WIDTH;
@@ -285,6 +291,9 @@ pub fn update_melee_hits() {
                     continue;
                 }
                 if !target.active || target.dead {
+                    continue;
+                }
+                if target.invuln_timer > 0 {
                     continue;
                 }
 
